@@ -1,0 +1,248 @@
+import CommonSpace from "@/components/shared/CommonSpace";
+import DashboardSearch from "@/components/shared/DashboardSearch";
+import DashboardTopSection from "@/components/shared/DashboardTopSection";
+import Pagination from "@/components/shared/Pagination";
+import SectionHeader from "@/components/shared/SectionHeader";
+import { useState } from "react";
+import { LuExternalLink } from "react-icons/lu";
+import { RxCopy } from "react-icons/rx";
+import { tableDesign } from "../package/PackageList";
+
+interface Appointment {
+  id: number;
+  name: string;
+  date: string;
+  time: string;
+  duration: string;
+  status: "Scheduled" | "Completed" | "Cancelled" | "Pending";
+  link?: string; // optional for external/open link
+}
+
+const tableHeaders = [
+  { label: "#", align: "text-center" },
+  { label: "Name", align: "text-left hidden sm:table-cell" },
+  { label: "Date", align: "text-left hidden md:table-cell" },
+  { label: "Time", align: "text-left hidden md:table-cell" },
+  { label: "Duration", align: "text-left hidden sm:table-cell" },
+  { label: "Status", align: "text-left hidden sm:table-cell" },
+  { label: "Link", align: "text-left" },
+];
+
+const appointments: Appointment[] = [
+  {
+    id: 1,
+    name: "John Doe",
+    date: "2026-03-07",
+    time: "10:00",
+    duration: "30 mins",
+    status: "Scheduled",
+    link: "https://example.com/john",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    date: "2026-03-07",
+    time: "11:00",
+    duration: "1 hr",
+    status: "Completed",
+    link: "https://example.com/jane",
+  },
+  {
+    id: 3,
+    name: "Michael Johnson",
+    date: "2026-03-08",
+    time: "09:30",
+    duration: "45 mins",
+    status: "Pending",
+  },
+  {
+    id: 4,
+    name: "Emily Davis",
+    date: "2026-03-08",
+    time: "14:00",
+    duration: "30 mins",
+    status: "Cancelled",
+  },
+  {
+    id: 5,
+    name: "David Wilson",
+    date: "2026-03-09",
+    time: "16:00",
+    duration: "1 hr",
+    status: "Scheduled",
+    link: "https://example.com/david",
+  },
+  {
+    id: 6,
+    name: "Sara Lee",
+    date: "2026-03-10",
+    time: "10:30",
+    duration: "30 mins",
+    status: "Scheduled",
+  },
+  {
+    id: 7,
+    name: "Chris Martin",
+    date: "2026-03-10",
+    time: "12:00",
+    duration: "1 hr",
+    status: "Completed",
+    link: "https://example.com/chris",
+  },
+  {
+    id: 8,
+    name: "Anna Brown",
+    date: "2026-03-11",
+    time: "09:00",
+    duration: "45 mins",
+    status: "Pending",
+  },
+  {
+    id: 9,
+    name: "Robert King",
+    date: "2026-03-11",
+    time: "15:00",
+    duration: "30 mins",
+    status: "Cancelled",
+    link: "https://example.com/robert",
+  },
+  {
+    id: 10,
+    name: "Laura White",
+    date: "2026-03-12",
+    time: "11:30",
+    duration: "1 hr",
+    status: "Scheduled",
+  },
+];
+
+const AppointmentList = () => {
+  const [copyMessage, setCopyMessage] = useState<string | null>(null);
+
+  const handleCopy = (link?: string) => {
+    if (!link) return;
+    navigator.clipboard.writeText(link);
+    setCopyMessage("Link copied to clipboard!");
+    setTimeout(() => setCopyMessage(null), 2000);
+  };
+
+  const handleOpenLink = (link?: string) => {
+    if (!link) return;
+    window.open(link, "_blank");
+  };
+
+  return (
+    <>
+      <DashboardTopSection
+        title="Appointments"
+        description="View upcoming and past appointments with status and timing details.
+        "
+      />
+      <CommonSpace>
+        <div className="flex justify-between">
+          <SectionHeader
+            title="Appointments"
+            description="Appointments with status and timing details"
+          />
+          <DashboardSearch />
+        </div>
+
+        {copyMessage && (
+          <div className="fixed top-4 right-4 bg-today-accent text-white p-2 rounded shadow-md z-50">
+            {copyMessage}
+          </div>
+        )}
+
+        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden mt-6">
+          <div className="block w-full overflow-x-auto">
+            <table className={tableDesign.table}>
+              <thead className={tableDesign.thead}>
+                <tr className={tableDesign.tr}>
+                  {tableHeaders.map((header, index) => (
+                    <th
+                      key={index}
+                      className={`${header.align} ${tableDesign.th}`}
+                    >
+                      {header.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody className={tableDesign.tbody}>
+                {appointments.length === 0 ? (
+                  <tr className={tableDesign.tr}>
+                    <td colSpan={7} className={`text-center ${tableDesign.td}`}>
+                      No appointments available
+                    </td>
+                  </tr>
+                ) : (
+                  appointments.map((appt, index) => (
+                    <tr key={appt.id} className={tableDesign.tr}>
+                      <td className={tableDesign.td}>{index + 1}</td>
+
+                      <td className={`hidden sm:table-cell ${tableDesign.td}`}>
+                        {appt.name}
+                      </td>
+                      <td className={`hidden md:table-cell ${tableDesign.td}`}>
+                        {appt.date}
+                      </td>
+                      <td className={`hidden md:table-cell ${tableDesign.td}`}>
+                        {appt.time}
+                      </td>
+                      <td className={`hidden sm:table-cell ${tableDesign.td}`}>
+                        {appt.duration}
+                      </td>
+                      <td className={`hidden sm:table-cell ${tableDesign.td}`}>
+                        <span
+                          className={`px-2 py-1 rounded-md text-white ${
+                            appt.status === "Scheduled"
+                              ? "bg-info"
+                              : appt.status === "Completed"
+                                ? "bg-green-500"
+                                : appt.status === "Cancelled"
+                                  ? "bg-danger"
+                                  : "bg-today-accent"
+                          }`}
+                        >
+                          {appt.status}
+                        </span>
+                      </td>
+
+                      <td className={tableDesign.td}>
+                        {appt.link ? (
+                          <div className="flex gap-1">
+                            <span
+                              onClick={() => handleCopy(appt.link)}
+                              className="text-today-accent p-1 rounded-md cursor-pointer border border-today-accent hover:bg-today-accent hover:text-white transition-all"
+                            >
+                              <RxCopy />
+                            </span>
+                            <span
+                              onClick={() => handleOpenLink(appt.link)}
+                              className="text-info p-1 rounded-md cursor-pointer border border-info hover:bg-info hover:text-white transition-all"
+                            >
+                              <LuExternalLink />
+                            </span>
+                          </div>
+                        ) : (
+                          "N/A"
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="my-6">
+          <Pagination currentPage={1} totalPages={5} onPageChange={() => {}} />
+        </div>
+      </CommonSpace>
+    </>
+  );
+};
+
+export default AppointmentList;
