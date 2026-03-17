@@ -18,16 +18,21 @@ interface DashboardHeaderProps {
 
 const DashboardHeader = ({ sidebarOpen }: DashboardHeaderProps) => {
   const headerContent = (
-    <header className="sticky top-0 z-50 w-full h-20 bg-white px-4.5">
+    <header className="sticky top-0 z-50 w-full h-20 bg-white px-4.5 ">
       <div className="flex justify-between items-center h-full">
-        <div className="flex items-center gap-7.5">
-          <Link to={"/dashboard"}>
-            <img
-              className="w-20 mix-blend-multiply"
-              src={logo || "/logo.svg"}
-              alt="logo"
-            />
-          </Link>
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-1">
+            <Link to="/dashboard" className="flex items-center h-20 w-10">
+              <img
+                className="  object-cover w-full h-full "
+                src={logo || "/logo.svg"}
+                alt="logo"
+              />
+            </Link>
+
+            <p className="text-xl font-bold whitespace-nowrap">Dont forget</p>
+          </div>
+
           <div className="hidden md:block">
             <DashboardSearch />
           </div>

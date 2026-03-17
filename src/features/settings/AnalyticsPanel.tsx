@@ -9,7 +9,7 @@ const AnalyticsPanel = () => {
           On-demand only: click "Refresh" buttons to update metrics. No
           auto-refresh to save bandwidth.
         </p>
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex flex-col sm:flex-row gap-3 ">
           <CommonButton>Refresh All Analytics</CommonButton>
           <CommonButton>Print All Reports</CommonButton>
         </div>
@@ -76,8 +76,8 @@ const AnalyticsPanel = () => {
           key={section.title}
           className="bg-white rounded-2xl border border-border shadow-sm p-6"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-gray-800">{section.title}</h3>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+            <h3 className="font-bold text-text">{section.title}</h3>
             <div className="flex gap-2">
               <CommonButton>Print</CommonButton>
               <CommonButton>Refresh</CommonButton>
@@ -88,7 +88,7 @@ const AnalyticsPanel = () => {
               <StatCard key={s.label} {...s} />
             ))}
           </div>
-          <p className="text-xs text-gray-400 mt-3">
+          <p className="text-xs text-text mt-3">
             Last updated: {section.updated}
           </p>
         </div>

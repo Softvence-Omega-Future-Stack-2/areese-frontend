@@ -18,13 +18,15 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const statsData = [
   {
     id: "due-today",
     label: "Due Today",
     value: 5,
     icon: <CheckCircle2 className="h-6 w-6" />,
-    color: "orange" as const,
+    iconBg: "bg-info",
+    iconColor: "text-white",
     trend: { value: 12, isPositive: true },
   },
   {
@@ -32,7 +34,8 @@ const statsData = [
     label: "Follow Up",
     value: 8,
     icon: <Clock className="h-6 w-6" />,
-    color: "blue" as const,
+    iconBg: "bg-warning",
+    iconColor: "text-white",
     trend: { value: 8, isPositive: true },
   },
   {
@@ -40,7 +43,8 @@ const statsData = [
     label: "Late",
     value: 2,
     icon: <AlertCircle className="h-6 w-6" />,
-    color: "red" as const,
+    iconBg: "bg-danger",
+    iconColor: "text-white",
     trend: { value: 5, isPositive: false },
   },
   {
@@ -48,7 +52,8 @@ const statsData = [
     label: "Upcoming",
     value: 12,
     icon: <TrendingUp className="h-6 w-6" />,
-    color: "green" as const,
+    iconBg: "bg-upcoming",
+    iconColor: "text-white",
     trend: { value: 3, isPositive: true },
   },
 ];
@@ -195,6 +200,7 @@ const filterOptions = [
   { label: "Follow Up", value: "follow-up" },
   { label: "Due Today", value: "due-today" },
 ] as const;
+
 const Dashboard = () => {
   const [filter, setFilter] = useState<string>("all");
 
@@ -207,6 +213,7 @@ const Dashboard = () => {
         );
 
   const navigate = useNavigate();
+
   return (
     <section className="w-full">
       <DashboardTopSection
@@ -219,17 +226,29 @@ const Dashboard = () => {
       <StatCards stats={statsData} />
 
       <CommonSpace>
-        <div className="flex justify-between pb-6">
-          <SectionHeader title="Task List" />
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col lg:flex-row justify-between items-start pb-6 gap-3">
+          <div className="w-full lg:w-auto">
+            <SectionHeader title="Task List" />
+          </div>
+          <div className="w-full lg:w-auto flex flex-col sm:flex-row gap-2">
             <DashboardSearch />
-            <CommonSelect
-              value={filter}
-              item={filterOptions}
-              placeholder="Filter by"
-              onValueChange={(val) => setFilter(val)}
-            />
-            <CommonButton>Follow-ups</CommonButton>
+
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              <CommonSelect
+                value={filter}
+                item={filterOptions}
+                placeholder="Filter by"
+                onValueChange={(val) => setFilter(val)}
+                className="w-full sm:w-auto"
+              />
+
+              <CommonButton
+                onClick={() => navigate("/follow-ups")}
+                className="w-full sm:w-auto "
+              >
+                Follow-ups
+              </CommonButton>
+            </div>
           </div>
         </div>
         <TaskCard activities={filteredActivities} />

@@ -1,4 +1,3 @@
-import CommonSpace from "@/components/shared/CommonSpace";
 import DashboardSearch from "@/components/shared/DashboardSearch";
 import DashboardTopSection from "@/components/shared/DashboardTopSection";
 import Pagination from "@/components/shared/Pagination";
@@ -7,6 +6,7 @@ import { useState } from "react";
 import { LuExternalLink } from "react-icons/lu";
 import { RxCopy } from "react-icons/rx";
 import { tableDesign } from "../package/PackageList";
+import AppointmentModal from "./AppointmentModal";
 
 interface Appointment {
   id: number;
@@ -19,12 +19,12 @@ interface Appointment {
 }
 
 const tableHeaders = [
-  { label: "#", align: "text-center" },
-  { label: "Name", align: "text-left hidden sm:table-cell" },
-  { label: "Date", align: "text-left hidden md:table-cell" },
-  { label: "Time", align: "text-left hidden md:table-cell" },
-  { label: "Duration", align: "text-left hidden sm:table-cell" },
-  { label: "Status", align: "text-left hidden sm:table-cell" },
+  { label: "#", align: "text-center hidden lg:table-cell" },
+  { label: "Name", align: "text-left  " },
+  { label: "Date", align: "text-left hidden md:table-cell " },
+  { label: "Time", align: "text-left " },
+  { label: "Duration", align: "text-left hidden md:table-cell" },
+  { label: "Status", align: "text-left hidden md:table-cell" },
   { label: "Link", align: "text-left" },
 ];
 
@@ -118,6 +118,7 @@ const appointments: Appointment[] = [
 
 const AppointmentList = () => {
   const [copyMessage, setCopyMessage] = useState<string | null>(null);
+  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
 
   const handleCopy = (link?: string) => {
     if (!link) return;
@@ -138,8 +139,8 @@ const AppointmentList = () => {
         description="View upcoming and past appointments with status and timing details.
         "
       />
-      <CommonSpace>
-        <div className="flex justify-between">
+      <>
+        <div className="flex flex-col md:flex-row justify-between gap-2">
           <SectionHeader
             title="Appointments"
             description="Appointments with status and timing details"
@@ -148,7 +149,7 @@ const AppointmentList = () => {
         </div>
 
         {copyMessage && (
-          <div className="fixed top-4 right-4 bg-today-accent text-white p-2 rounded shadow-md z-50">
+          <div className="fixed top-4 right-4 bg-cta text-white p-2 rounded shadow-md z-50">
             {copyMessage}
           </div>
         )}
@@ -179,21 +180,24 @@ const AppointmentList = () => {
                 ) : (
                   appointments.map((appt, index) => (
                     <tr key={appt.id} className={tableDesign.tr}>
-                      <td className={tableDesign.td}>{index + 1}</td>
+                      <td className={`${tableDesign.td} hidden lg:table-cell`}>
+                        {index + 1}
+                      </td>
 
-                      <td className={`hidden sm:table-cell ${tableDesign.td}`}>
+                      <td
+                        onClick={() => setIsAppointmentModalOpen(true)}
+                        className={` ${tableDesign.td} cursor-pointer`}
+                      >
                         {appt.name}
                       </td>
-                      <td className={`hidden md:table-cell ${tableDesign.td}`}>
+                      <td className={` ${tableDesign.td} hidden md:table-cell`}>
                         {appt.date}
                       </td>
+                      <td className={` ${tableDesign.td}`}>{appt.time}</td>
                       <td className={`hidden md:table-cell ${tableDesign.td}`}>
-                        {appt.time}
-                      </td>
-                      <td className={`hidden sm:table-cell ${tableDesign.td}`}>
                         {appt.duration}
                       </td>
-                      <td className={`hidden sm:table-cell ${tableDesign.td}`}>
+                      <td className={`hidden md:table-cell ${tableDesign.td}`}>
                         <span
                           className={`px-2 py-1 rounded-md text-white ${
                             appt.status === "Scheduled"
@@ -202,7 +206,7 @@ const AppointmentList = () => {
                                 ? "bg-green-500"
                                 : appt.status === "Cancelled"
                                   ? "bg-danger"
-                                  : "bg-today-accent"
+                                  : "bg-cta"
                           }`}
                         >
                           {appt.status}
@@ -214,7 +218,7 @@ const AppointmentList = () => {
                           <div className="flex gap-1">
                             <span
                               onClick={() => handleCopy(appt.link)}
-                              className="text-today-accent p-1 rounded-md cursor-pointer border border-today-accent hover:bg-today-accent hover:text-white transition-all"
+                              className="text-today-accent p-1 rounded-md cursor-pointer border border-today-accent hover:bg-cta hover:text-white transition-all"
                             >
                               <RxCopy />
                             </span>
@@ -240,7 +244,22 @@ const AppointmentList = () => {
         <div className="my-6">
           <Pagination currentPage={1} totalPages={5} onPageChange={() => {}} />
         </div>
-      </CommonSpace>
+      </>
+
+      {isAppointmentModalOpen && (
+        <AppointmentModal
+          appointment={{
+            id: 1,
+            name: "John Doe",
+            date: "2023-08-15",
+            time: "10:00",
+            duration: "1 hr",
+            status: "Scheduled",
+            link: "https://example.com/appointment/1",
+          }}
+          onClose={() => setIsAppointmentModalOpen(false)}
+        />
+      )}
     </>
   );
 };

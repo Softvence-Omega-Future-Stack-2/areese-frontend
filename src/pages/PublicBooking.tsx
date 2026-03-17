@@ -1,5 +1,5 @@
 import DashboardTopSection from "@/components/shared/DashboardTopSection";
-import PublicBookingForm from "@/features/publicBooking/PublicBookingForm";
+import BookingLatest from "@/features/publicBooking/BookingLatest";
 
 const PublicBooking = () => {
   return (
@@ -9,7 +9,7 @@ const PublicBooking = () => {
         description="Generate unique booking links with optional booking limits and post-booking redirects.
         "
       />
-      <PublicBookingForm />
+      <BookingLatest />
     </div>
   );
 };

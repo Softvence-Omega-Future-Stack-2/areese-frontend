@@ -2,17 +2,10 @@ import CommonButton from "@/components/shared/CommonButton";
 import SectionHeader from "@/components/shared/SectionHeader";
 import { inputClass } from "../task/CreateTaskForm";
 
-interface PackageForm {
-  name: string;
-  price: string;
-  duration: string;
-  description: string;
-}
-
 interface PackageItem {
-  cancel: () => void;
+  onCancel: () => void;
 }
-const CreatePackage: React.FC<PackageItem> = ({ cancel }) => {
+const CreatePackage: React.FC<PackageItem> = ({ onCancel }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
@@ -59,7 +52,7 @@ const CreatePackage: React.FC<PackageItem> = ({ cancel }) => {
         </div>
 
         <div className="flex justify-end items-center gap-2">
-          <CommonButton onClick={() => cancel} variant="secondary">
+          <CommonButton onClick={onCancel} variant="secondary" type="button">
             Cancel
           </CommonButton>
           <CommonButton onClick={handleSubmit}>Create Package</CommonButton>

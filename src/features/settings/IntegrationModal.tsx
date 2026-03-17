@@ -142,7 +142,7 @@ const IntegrationModal: React.FC<IntegrationNameProps> = ({
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-lg hover:bg-gray-100 cursor-pointer"
+            className="text-text hover:text-gray-600 transition-colors p-1 rounded-lg hover:bg-gray-100 cursor-pointer"
           >
             <IoCloseSharp />
           </button>

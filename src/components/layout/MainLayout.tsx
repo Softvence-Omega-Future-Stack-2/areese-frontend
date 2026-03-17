@@ -11,13 +11,13 @@ const MainLayout: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   return (
-    <div className="w-full min-h-screen bg-[#F8FAFC] pt-2">
+    <div className="w-full h-screen bg-bg pt-2 overflow-hidden">
       <div className="w-full flex items-center justify-between bg-white">
         <DashboardHeader sidebarOpen={sidebarOpen} />
         <div className="lg:hidden pr-4">
           <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
             <SheetTrigger className="cursor-pointer" asChild>
-              <button className="p-2 rounded-md border border-slate-200">
+              <button className="p-2 rounded-md border border-border">
                 <Menu className="h-6 w-6 cursor-pointer" />
               </button>
             </SheetTrigger>
@@ -31,12 +31,12 @@ const MainLayout: React.FC = () => {
         </div>
       </div>
 
-      <div className=" flex items-start px-4.5 pt-6 gap-6">
-        <div className="hidden lg:block">
+      <div className=" flex items-start px-4.5 pt-2 md:pt-6  gap-6  h-[calc(100vh-80px)]  ">
+        <div className="hidden lg:block h-full ">
           <AdminSidebar sidebarOpen={true} />
         </div>
 
-        <div className="flex-1 w-full">
+        <div className="flex-1 w-full h-full pb-6 overflow-y-auto ">
           <Outlet />
         </div>
       </div>

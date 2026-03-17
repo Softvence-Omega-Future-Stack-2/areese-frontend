@@ -14,17 +14,18 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
   ...props
 }) => {
   // Only base style is optional
-  const baseStyles = "text-[#101828] flex items-center";
+  const baseStyles = "text-text flex items-center";
 
   // Fixed leading for each size
   const sizeStyles: Record<typeof size, string> = {
     xs: "text-xs leading-4 ",
-    sm: "text-sm leading-5 font-normal text-gray-400",
+    sm: "text-sm leading-5 font-normal ",
     md: "text-base leading-6 font-medium ",
     lg: "text-sm sm:text-lg leading-5 sm:leading-7 font-bold",
     xl: "text-xl leading-8 font-bold",
     "2xl": "text-2xl leading-9 font-bold",
-    "3xl": "text-3xl leading-10 font-bold",
+    "3xl":
+      " text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-8 md:leading-10 font-bold",
     "4xl": "text-4xl leading-[3rem] font-bold",
   };
 

@@ -145,9 +145,7 @@ const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
 
   return (
     <aside
-      className={`${
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } fixed inset-y-0 left-0 z-40 w-[280px] transition-transform duration-300 ease-in-out md:translate-x-0 md:static bg-white rounded-[10px] px-5 py-6`}
+      className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-40 w-[280px] transition-transform duration-300 ease-in-out md:translate-x-0 md:static bg-white lg:rounded-[10px] px-5 py-6 flex flex-col h-full sidebar-scroll`}
     >
       <div className="flex items-center gap-3 bg-white border border-border rounded-[5px] px-3 py-2 mb-5">
         <Avatar className="h-8 w-8">
@@ -155,11 +153,11 @@ const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
           <AvatarFallback>ADMIN</AvatarFallback>
         </Avatar>
         <div className="text-left ">
-          <div className="text-sm text-slate-700">admin@admin.com</div>
-          <div className="text-base text-slate-900">super-admin</div>
+          <div className="text-sm text-text">admin@admin.com</div>
+          <div className="text-base text-text">super-admin</div>
         </div>
       </div>
-      {/* Menu */}
+
       <div className="flex-1 overflow-y-auto">
         {Object.entries(groupedItems).map(([section, items]) => (
           <div key={section} className="mb-2">
@@ -174,12 +172,12 @@ const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
                   className={({ isActive }) =>
                     `flex items-center gap-3 w-full h-10 px-2 rounded ${
                       isActive
-                        ? "text-danger bg-[#F1F5F9]  font-medium"
-                        : "hover:bg-muted/50"
+                        ? "text-text bg-bg  font-semibold"
+                        : "hover:bg-bg"
                     }`
                   }
                 >
-                  <item.icon className="h-4 w-4" />
+                  <item.icon className="h-4 w-4 text-text" />
                   {item.label}
                 </NavLink>
               ))}

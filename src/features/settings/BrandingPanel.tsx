@@ -26,7 +26,7 @@ const BrandingPanel = () => {
 
   return (
     <div className="bg-white rounded-2xl border border-border shadow-sm p-6">
-      <h3 className="font-bold text-gray-800 mb-1">Workspace Branding</h3>
+      <h3 className="font-bold text-text mb-1">Workspace Branding</h3>
 
       <div className="w-full h-px bg-gray-100 my-3" />
 
@@ -50,12 +50,12 @@ const BrandingPanel = () => {
           />
         </label>
 
-        <span className="text-sm text-gray-400">
+        <span className="text-sm text-text">
           {logo ? logo.name : "No file chosen"}
         </span>
       </div>
 
-      <p className="text-xs text-gray-400 mb-4">
+      <p className="text-xs text-text mb-4">
         Upload a logo image (max 2MB, formats: JPEG, PNG, GIF, SVG, WebP)
       </p>
 

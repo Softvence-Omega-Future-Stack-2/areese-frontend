@@ -1,5 +1,6 @@
 import MainLayout from "@/components/layout/MainLayout";
 
+import ContactPage from "@/features/contactPage/ContactPage";
 import ListDetail from "@/features/dashboard/ListDetail";
 import BlogCategories from "@/pages/BlogCategories";
 import Blogs from "@/pages/Blogs";
@@ -7,6 +8,7 @@ import Contacts from "@/pages/Contacts";
 import CreateTask from "@/pages/CreateTask";
 import Dashboard from "@/pages/Dashboard";
 import FollowUps from "@/pages/FollowUps";
+import Home from "@/pages/Home";
 import Login from "@/pages/login";
 import MessageTemplate from "@/pages/MessageTemplate";
 import Packages from "@/pages/Packages";
@@ -27,6 +29,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+
+        element: <Home />,
+      },
+      {
+        path: "/contact",
+
+        element: <ContactPage />,
+      },
+      {
+        path: "/login",
 
         element: <Login />,
       },

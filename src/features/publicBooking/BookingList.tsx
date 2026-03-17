@@ -124,7 +124,7 @@ const BookingList = () => {
         </div>
 
         {copyMessage && (
-          <div className="fixed top-4 right-4 bg-today-accent text-white p-2 rounded shadow-md z-50">
+          <div className="fixed top-4 right-4 bg-cta text-white p-2 rounded shadow-md z-50">
             {copyMessage}
           </div>
         )}
@@ -180,7 +180,7 @@ const BookingList = () => {
                           <div className="flex  gap-1 ">
                             <span
                               onClick={() => handleCopy(assessment.shareLink)}
-                              className="text-today-accent p-1 rounded-md cursor-pointer border border-today-accent hover:bg-today-accent hover:text-white transition-all"
+                              className="text-today-accent p-1 rounded-md cursor-pointer border border-today-accent hover:bg-cta hover:text-white transition-all"
                             >
                               <RxCopy />
                             </span>

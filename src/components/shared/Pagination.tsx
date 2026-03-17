@@ -15,22 +15,20 @@ const Pagination: React.FC<PaginationProps> = ({
   const pages: (number | string)[] = [];
 
   if (totalPages <= 4) {
-    // Show all pages if 4 or less
     for (let i = 1; i <= totalPages; i++) pages.push(i);
   } else {
-    // Always show first and last
     const left = Math.max(currentPage - 1, 2);
     const right = Math.min(currentPage + 1, totalPages - 1);
 
-    pages.push(1); // first page
+    pages.push(1);
 
-    if (left > 2) pages.push("..."); // left ellipsis
+    if (left > 2) pages.push("...");
 
-    for (let i = left; i <= right; i++) pages.push(i); // middle pages
+    for (let i = left; i <= right; i++) pages.push(i);
 
-    if (right < totalPages - 1) pages.push("..."); // right ellipsis
+    if (right < totalPages - 1) pages.push("...");
 
-    pages.push(totalPages); // last page
+    pages.push(totalPages);
   }
 
   return (
@@ -38,7 +36,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex items-center gap-1 px-3 py-1 text-sm rounded-md disabled:opacity-40 hover:bg-today-accent cursor-pointer hover:text-white"
+        className="flex items-center gap-1 px-3 py-1 text-sm rounded-md disabled:opacity-40 hover:bg-cta cursor-pointer hover:text-white"
       >
         <ChevronLeft size={16} />
         Previous
@@ -55,8 +53,8 @@ const Pagination: React.FC<PaginationProps> = ({
             onClick={() => onPageChange(page as number)}
             className={`px-3 py-1 text-sm rounded-md cursor-pointer ${
               currentPage === page
-                ? "bg-today-accent hover:bg-late-accent border border-border text-white"
-                : "hover:bg-gray-100"
+                ? "bg-cta hover:bg-late-accent border border-border text-white"
+                : "hover:bg-cta hover:text-white"
             }`}
           >
             {page}
@@ -67,7 +65,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex items-center gap-1 px-3 py-1 text-sm rounded-md disabled:opacity-40 hover:bg-today-accent cursor-pointer hover:text-white"
+        className="flex items-center gap-1 px-3 py-1 text-sm rounded-md disabled:opacity-40 hover:bg-cta cursor-pointer hover:text-bg"
       >
         Next
         <ChevronRight size={16} />

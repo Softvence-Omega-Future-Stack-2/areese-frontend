@@ -36,7 +36,7 @@ const CommonSelect = <T extends string>({
     <Select value={value || undefined} onValueChange={onValueChange}>
       <SelectTrigger
         style={{ minWidth: w }}
-        className={` ${className} bg-[#FCFCFC] border !border-border px-3 py-5 cursor-pointer rounded-md  text-sm  transition-all duration-200 ${
+        className={` ${className} bg-background border !border-border px-3 py-5 cursor-pointer rounded-md  text-sm  transition-all duration-200 ${
           disabled && "opacity-50 cursor-not-allowed"
         } `}
       >

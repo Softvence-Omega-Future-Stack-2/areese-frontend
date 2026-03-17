@@ -9,12 +9,12 @@ const BookingCapsPanel = () => {
 
   return (
     <div className="bg-white rounded-2xl border border-border shadow-sm p-6">
-      <h3 className="font-bold text-gray-800 mb-1">Booking Limits</h3>
-      <div className="w-full h-px bg-gray-100 my-3" />
-      <p className="text-sm text-gray-500 mb-5">
+      <h3 className="font-bold text-text mb-1">Booking Limits</h3>
+      <div className="w-full h-px bg-bg my-3" />
+      <p className="text-sm text-text/50 mb-5">
         Prevent overbooking and manage workload with caps.
       </p>
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label className={inputClass.label}>Daily limit</label>
           <input

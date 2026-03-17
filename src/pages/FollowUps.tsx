@@ -1,5 +1,5 @@
 import DashboardTopSection from "@/components/shared/DashboardTopSection";
-import FollowUpsPanel from "@/features/followUp/FollowUpsPanel";
+import FollowUpLatest from "@/features/followUp/FollowUpLatest";
 
 const FollowUps = () => {
   return (
@@ -9,9 +9,7 @@ const FollowUps = () => {
         description="View and manage all your follow ups efficiently"
       />
 
-      <div>
-        <FollowUpsPanel />
-      </div>
+      <FollowUpLatest />
     </div>
   );
 };

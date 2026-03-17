@@ -23,26 +23,19 @@ interface ActivityFeedProps {
 }
 
 const typeColors: Record<Activity["type"], string> = {
-  "Due Today":
-    "bg-[var(--color-today-bg)] text-[var(--color-today-accent)] border-[var(--color-today-accent)]",
-
-  late: "bg-[var(--color-late-bg)] text-[var(--color-late-accent)] border-[var(--color-late-accent)]",
-
-  Upcoming:
-    "bg-[var(--color-upcoming-bg)] text-[var(--color-upcoming-accent)] border-[var(--color-upcoming-accent)]",
-
-  "Follow Up":
-    "bg-[var(--color-followup-bg)] text-[var(--color-followup-accent)] border-[var(--color-followup-accent)]",
-
-  Completed: "bg-green-100 text-green-700 border-green-600",
+  "Due Today": "bg-cta text-white",
+  late: "bg-danger text-white",
+  Upcoming: "bg-upcoming text-white",
+  "Follow Up": "bg-info text-white ",
+  Completed: "bg-green text-white ",
 };
+
 const iconColors: Record<Activity["type"], string> = {
-  "Due Today": "text-[var(--color-today-accent)] bg-[var(--color-today-bg)]",
-  late: "text-[var(--color-late-accent)] bg-[var(--color-late-bg)]",
-  Upcoming: "text-[var(--color-upcoming-accent)] bg-[var(--color-upcoming-bg)]",
-  "Follow Up":
-    "text-[var(--color-followup-accent)] bg-[var(--color-followup-bg)]",
-  Completed: "text-green-600 bg-green-100",
+  "Due Today": "bg-cta text-white",
+  late: "bg-danger text-white",
+  Upcoming: "bg-upcoming text-white",
+  "Follow Up": "bg-info text-white ",
+  Completed: "bg-green text-white ",
 };
 
 export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
