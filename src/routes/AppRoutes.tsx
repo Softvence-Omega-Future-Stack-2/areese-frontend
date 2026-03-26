@@ -1,11 +1,13 @@
 import MainLayout from "@/components/layout/MainLayout";
 
+import CollaboratorLayout from "@/components/layout/CollaboratorLayout";
 import ContactPage from "@/features/contactPage/ContactPage";
 import ListDetail from "@/features/dashboard/ListDetail";
 import BlogCategories from "@/pages/BlogCategories";
 import Blogs from "@/pages/Blogs";
+import CollaboratorHome from "@/pages/collaborator/CollaboratorHome";
 import Contacts from "@/pages/Contacts";
-import CreateTask from "@/pages/CreateTask";
+import CreateDashboard from "@/pages/CreateDashboard";
 import Dashboard from "@/pages/Dashboard";
 import FollowUps from "@/pages/FollowUps";
 import Home from "@/pages/Home";
@@ -44,12 +46,13 @@ const router = createBrowserRouter([
       },
       {
         element: <MainLayout />,
+        path: "/admin",
         children: [
           { path: "dashboard", element: <Dashboard /> },
-          { path: "create-task", element: <CreateTask /> },
-          { path: "create-task/:id", element: <ListDetail /> },
+          { path: "create-dashboard", element: <CreateDashboard /> },
+          { path: "dashboard-details/:id", element: <ListDetail /> },
           { path: "follow-ups", element: <FollowUps /> },
-          { path: "packages", element: <Packages /> },
+          { path: "booking-packages", element: <Packages /> },
           { path: "public-booking", element: <PublicBooking /> },
           { path: "appointments", element: <ViewAppointments /> },
           { path: "settings", element: <Settings /> },
@@ -60,7 +63,29 @@ const router = createBrowserRouter([
           { path: "users", element: <Users /> },
           { path: "blog-categories", element: <BlogCategories /> },
           { path: "blogs", element: <Blogs /> },
-          { path: "profile-settings", element: <ProfileSettings /> },
+          { path: "profile", element: <ProfileSettings /> },
+        ],
+      },
+      {
+        path: "/collaborator",
+        element: <CollaboratorLayout />,
+        children: [
+          { path: "dashboard", element: <CollaboratorHome /> },
+          { path: "create-dashboard", element: <CreateDashboard /> },
+          { path: "dashboard-details/:id", element: <ListDetail /> },
+          { path: "follow-ups", element: <FollowUps /> },
+          { path: "booking-packages", element: <Packages /> },
+          { path: "public-booking", element: <PublicBooking /> },
+          { path: "appointments", element: <ViewAppointments /> },
+          { path: "settings", element: <Settings /> },
+          { path: "message-template", element: <MessageTemplate /> },
+          { path: "team-access", element: <TeamAccess /> },
+          { path: "plans", element: <Plans /> },
+          { path: "contacts", element: <Contacts /> },
+          { path: "users", element: <Users /> },
+          { path: "blog-categories", element: <BlogCategories /> },
+          { path: "blogs", element: <Blogs /> },
+          { path: "profile", element: <ProfileSettings /> },
         ],
       },
     ],

@@ -2,22 +2,7 @@ import { FiLogOut } from "react-icons/fi";
 
 import logo from "@/assets/images/profile.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Calendar,
-  ClipboardList,
-  CreditCard,
-  FileText,
-  LayoutDashboard,
-  List,
-  Mail,
-  MessageSquare,
-  Package,
-  Plus,
-  Repeat,
-  Settings,
-  User,
-  Users,
-} from "lucide-react";
+import { LayoutDashboard } from "lucide-react";
 
 import { type FC } from "react";
 import { NavLink } from "react-router-dom";
@@ -40,99 +25,11 @@ export const sidebarItems: SidebarItem[] = [
   {
     icon: LayoutDashboard,
     label: "View Dashboard",
-    path: "/admin/dashboard",
+    path: "/collaborator/dashboard",
     section: "Main",
   },
   // Tasks
-  {
-    icon: Plus,
-    label: "Create Dashboard",
-    path: "/admin/create-dashboard",
-    section: "Tasks",
-  },
-  {
-    icon: Repeat,
-    label: "Follow-Ups",
-    path: "/admin/follow-ups",
-    section: "Tasks",
-  },
-  // Packages & Bookings
-  {
-    icon: Package,
-    label: "Booking Package",
-    path: "/admin/booking-packages",
-    section: "Packages & Booking",
-  },
-  {
-    icon: Calendar,
-    label: "Public Booking",
-    path: "/admin/public-booking",
-    section: "Packages & Booking",
-  },
-  {
-    icon: ClipboardList,
-    label: "View Appointments",
-    path: "/admin/appointments",
-    section: "Packages & Booking",
-  },
-  // Settings
-  {
-    icon: Settings,
-    label: "Settings",
-    path: "/admin/settings",
-    section: "Settings",
-  },
-  {
-    icon: MessageSquare,
-    label: "Message Template",
-    path: "/admin/message-template",
-    section: "Settings",
-  },
-  {
-    icon: Users,
-    label: "Team Access",
-    path: "/admin/team-access",
-    section: "Settings",
-  },
-  {
-    icon: CreditCard,
-    label: "Plans",
-    path: "/admin/plans",
-    section: "Settings",
-  },
-  // Contacts & Users
-  {
-    icon: Mail,
-    label: "Contacts",
-    path: "/admin/contacts",
-    section: "User Management",
-  },
-  {
-    icon: User,
-    label: "Users",
-    path: "/admin/users",
-    section: "User Management",
-  },
-  // Blogs
-  {
-    icon: List,
-    label: "Blog Categories",
-    path: "/admin/blog-categories",
-    section: "Content & Resources",
-  },
-  {
-    icon: FileText,
-    label: "Blogs",
-    path: "/admin/blogs",
-    section: "Content & Resources",
-  },
-  // Profile
-  {
-    icon: User,
-    label: "Profile",
-    path: "/admin/profile",
-    section: "Profile",
-  },
+
   // Profile
   {
     icon: FiLogOut,
@@ -142,7 +39,10 @@ export const sidebarItems: SidebarItem[] = [
   },
 ];
 
-const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
+const CollaboratorSidebar: FC<SidebarProps> = ({
+  sidebarOpen,
+  onLinkClick,
+}) => {
   const groupedItems = sidebarItems.reduce(
     (acc, item) => {
       if (!acc[item.section]) acc[item.section] = [];
@@ -159,11 +59,11 @@ const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
       <div className="flex items-center gap-3 bg-white border border-border rounded-[5px] px-3 py-2 mb-5">
         <Avatar className="h-8 w-8">
           <AvatarImage src={logo} />
-          <AvatarFallback>ADMIN</AvatarFallback>
+          <AvatarFallback>Collaborator</AvatarFallback>
         </Avatar>
         <div className="text-left ">
-          <div className="text-sm text-text">admin@admin.com</div>
-          <div className="text-base text-text">super-admin</div>
+          <div className="text-sm text-text">collaborator@gmail.com</div>
+          <div className="text-base text-text">Collaborator</div>
         </div>
       </div>
 
@@ -198,4 +98,4 @@ const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
   );
 };
 
-export default AdminSidebar;
+export default CollaboratorSidebar;

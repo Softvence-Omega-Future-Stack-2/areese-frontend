@@ -2,27 +2,37 @@ import CardAction from "@/components/shared/CardAction";
 import CommonHeader from "@/components/shared/CommonHeader";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { setDashboard } from "@/store/dashboardStore/dashboardSlice";
 import { format } from "date-fns";
 import { Clock } from "lucide-react";
 import React from "react";
 import { LuCalendarDays, LuDot } from "react-icons/lu";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export interface Activity {
+export interface DashboardType {
   id: string;
   type: "Due Today" | "late" | "Upcoming" | "Follow Up" | "Completed";
   title: string;
   description: string[];
   timestamp: Date;
   icon?: React.ReactNode;
+  invitees: string;
+  taskType: string;
+  videoPlatform: string;
+  endDate: string;
+  resources: string;
+  tags: string;
+  repeat: string;
+  reminder: string;
 }
 
 interface ActivityFeedProps {
-  activities: Activity[];
+  activities: DashboardType[];
   title?: string;
 }
 
-const typeColors: Record<Activity["type"], string> = {
+const typeColors: Record<DashboardType["type"], string> = {
   "Due Today": "bg-cta text-white",
   late: "bg-danger text-white",
   Upcoming: "bg-upcoming text-white",
@@ -30,18 +40,31 @@ const typeColors: Record<Activity["type"], string> = {
   Completed: "bg-green text-white ",
 };
 
-const iconColors: Record<Activity["type"], string> = {
+const iconColors: Record<DashboardType["type"], string> = {
   "Due Today": "bg-cta text-white",
   late: "bg-danger text-white",
   Upcoming: "bg-upcoming text-white",
   "Follow Up": "bg-info text-white ",
   Completed: "bg-green text-white ",
+};
+const bgColors: Record<DashboardType["type"], string> = {
+  "Due Today": "bg-brand",
+  late: "bg-followup-bg",
+  Upcoming: "bg-upcoming-bg",
+  "Follow Up": "bg-upcoming-bg ",
+  Completed: "bg-late-bg ",
 };
 
 export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
   const navigate = useNavigate();
   const handleDetails = (id: string) => {
-    navigate(`/create-task/${id}`);
+    navigate(`/admin/dashboard-details/${id}`);
+  };
+  const dispatch = useDispatch();
+
+  const handleSelectDashboard = (Dashboard: DashboardType) => {
+    dispatch(setDashboard(Dashboard));
+    navigate("/admin/follow-ups");
   };
   return (
     <div>
@@ -52,14 +75,14 @@ export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
               <div
                 key={activity.id}
                 className={cn(
-                  "rounded-lg p-4 transition-all border border-border bg-white h-full",
+                  "rounded-lg p-4 transition-all border border-border  h-full",
+                  bgColors[activity.type],
                 )}
-                onClick={() => handleDetails(activity.id)}
               >
                 <div className="flex items-start gap-4">
                   <div
                     className={cn(
-                      "mt-1 flex-shrink-0 p-2 rounded-md flex items-center justify-center",
+                      "mt-1 shrink-0 p-2 rounded-md flex items-center justify-center",
                       iconColors[activity.type],
                     )}
                   >
@@ -94,19 +117,20 @@ export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="flex items-center flex-shrink-0 gap-1 text-right">
+                  <div className="flex items-center shrink-0 gap-1 text-right">
                     <span>
                       <LuCalendarDays className="text-xl" />
                     </span>
-                    <p className="text-xs font-medium text-gray-500">
+                    <p className="text-xs font-medium text-text">
                       {format(activity.timestamp, "MMM dd, yyyy")}
                     </p>
                   </div>
                   <Badge
                     className={cn(
-                      "text-xs font-medium border",
+                      "text-xs font-medium border cursor-pointer",
                       typeColors[activity.type],
                     )}
+                    onClick={() => handleSelectDashboard(activity)}
                   >
                     {activity.type}
                   </Badge>
@@ -116,8 +140,8 @@ export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
           })
         ) : (
           <div className="py-8 text-center">
-            <Clock className="mx-auto h-12 w-12 text-gray-300" />
-            <p className="mt-2 text-sm text-gray-500">No activity yet</p>
+            <Clock className="mx-auto h-12 w-12 text-text/30" />
+            <p className="mt-2 text-sm text-text/50">No activity yet</p>
           </div>
         )}
       </div>

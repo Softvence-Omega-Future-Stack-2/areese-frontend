@@ -7,10 +7,10 @@ const NotificationsPanel = () => {
   const [overdue, setOverdue] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl border border-border shadow-sm p-6">
-      <h3 className="font-bold text-gray-800 mb-1">Platform Notifications</h3>
-      <div className="w-full h-px bg-gray-100 my-3" />
-      <p className="text-sm text-gray-500 mb-4">
+    <div className="bg-brand rounded-2xl border border-border shadow-sm p-6">
+      <h3 className="font-bold text-text mb-1">Platform Notifications</h3>
+      <div className="w-full h-px text-text/50 my-3" />
+      <p className="text-sm text-text mb-4">
         In-app notifications only. No SMS or email.
       </p>
       <div className="flex flex-col gap-3">

@@ -13,8 +13,8 @@ const Packages = () => {
       ) : (
         <>
           <DashboardTopSection
-            title="Package"
-            description="View and manage all your packages efficiently"
+            title="Booking Package"
+            description="View and manage all your booking packages efficiently"
             buttonText="Create New Package"
             action={() => setIsPackageOpen(true)}
           />

@@ -2,7 +2,7 @@ import CommonHeader from "@/components/shared/CommonHeader";
 import CommonSelect from "@/components/shared/CommonSelect";
 import { CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();

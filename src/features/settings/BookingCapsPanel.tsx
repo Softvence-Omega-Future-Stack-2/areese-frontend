@@ -1,6 +1,6 @@
 import CommonButton from "@/components/shared/CommonButton";
 import { useState } from "react";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 
 const BookingCapsPanel = () => {
   const [daily, setDaily] = useState(0);

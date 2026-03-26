@@ -1,5 +1,14 @@
 import CommonButton from "@/components/shared/CommonButton";
+import SectionHeader from "@/components/shared/SectionHeader";
+import {
+  setBusinessName,
+  setImage,
+} from "@/store/dashboardStore/dashboardSlice";
+import type { RootState } from "@/store/store";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { inputClass } from "../task/CreateDashboardForm";
 
 const BrandingPanel = () => {
   const [logo, setLogo] = useState<File | null>(null);
@@ -23,67 +32,93 @@ const BrandingPanel = () => {
     setLogo(null);
     setPreview(null);
   };
+  const { image, businessName } = useSelector(
+    (state: RootState) => state.dashboard,
+  );
+  const dispatch = useDispatch();
+
+  console.log("image", image);
+  console.log("businessName", businessName);
+  const handleSave = () => {
+    if (preview) {
+      dispatch(setImage(preview));
+      toast.success("Branding updated successfully");
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl border border-border shadow-sm p-6">
-      <h3 className="font-bold text-text mb-1">Workspace Branding</h3>
-
-      <div className="w-full h-px bg-gray-100 my-3" />
-
-      <p className="text-sm text-gray-500 mb-5">
-        Upload a logo and choose a color to personalize booking pages and
-        dashboards.
-      </p>
-
-      <label className="block text-sm font-semibold text-gray-700 mb-2">
-        Logo
-      </label>
-
-      <div className="flex items-center gap-3 mb-2">
-        <label className="cursor-pointer px-3 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition-colors">
-          Choose file
+      <SectionHeader
+        title="Workspace Branding"
+        description="Upload a logo and choose a color to personalize booking pages and
+        dashboards."
+      />
+      <div className="space-y-5 mt-4">
+        <div>
+          <label className={inputClass.label}>Business Name</label>
           <input
-            type="file"
-            className="hidden"
-            accept=".jpg,.jpeg,.png,.gif,.svg,.webp"
-            onChange={handleFileChange}
+            onChange={(e) => dispatch(setBusinessName(e.target.value))}
+            type="text"
+            placeholder="Business Name"
+            className={inputClass.input}
           />
-        </label>
+        </div>
+        <div>
+          <label className={inputClass.label}>Logo</label>
+          <div className="flex items-center gap-3 mb-2">
+            <label className="cursor-pointer px-3 py-1.5 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+              Choose file
+              <input
+                type="file"
+                className="hidden"
+                accept=".jpg,.jpeg,.png,.gif,.svg,.webp"
+                onChange={handleFileChange}
+              />
+            </label>
 
-        <span className="text-sm text-text">
-          {logo ? logo.name : "No file chosen"}
-        </span>
-      </div>
+            <span className="text-sm text-text">
+              {logo ? logo.name : "No file chosen"}
+            </span>
+          </div>
+          <p className="text-xs text-text mb-2">
+            Upload a logo image (max 2MB, formats: JPEG, PNG, GIF, SVG, WebP)
+          </p>
+        </div>
 
-      <p className="text-xs text-text mb-4">
-        Upload a logo image (max 2MB, formats: JPEG, PNG, GIF, SVG, WebP)
-      </p>
+        <div className="w-24 h-24 bg-bg rounded border border-dashed border-border flex items-center justify-center mb-5 relative">
+          {preview ? (
+            <>
+              <img
+                src={preview}
+                alt="logo preview"
+                className="w-full h-full object-cover rounded"
+              />
 
-      <div className="w-24 h-10 bg-gray-100 rounded border border-dashed border-gray-300 flex items-center justify-center mb-5 relative">
-        {preview ? (
-          <>
+              <button
+                type="button"
+                onClick={handleRemove}
+                className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full cursor-pointer"
+              >
+                ×
+              </button>
+            </>
+          ) : image ? (
             <img
-              src={preview}
+              src={preview || image}
               alt="logo preview"
-              className="w-full h-full object-contain rounded"
+              className="w-full h-full object-cover rounded"
             />
+          ) : (
+            <span className="text-xs text-today-accent p-1 h-5! w-full ">
+              Logo preview
+            </span>
+          )}
+        </div>
 
-            <button
-              type="button"
-              onClick={handleRemove}
-              className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full cursor-pointer"
-            >
-              ×
-            </button>
-          </>
-        ) : (
-          <span className="text-xs text-blue-500 p-1 w-full ">
-            Logo preview
-          </span>
-        )}
+        <CommonButton onClick={handleSave} className="">
+          Update
+        </CommonButton>
       </div>
-
-      <CommonButton className="!w-full">Update</CommonButton>
     </div>
   );
 };

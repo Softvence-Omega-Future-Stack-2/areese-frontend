@@ -5,7 +5,7 @@ import DashboardSearch from "@/components/shared/DashboardSearch";
 import DashboardTopSection from "@/components/shared/DashboardTopSection";
 import SectionHeader from "@/components/shared/SectionHeader";
 import StatCards from "@/components/shared/StatCards";
-import TaskCard, { type Activity } from "@/features/dashboard/TaskCard";
+import TaskCard, { type DashboardType } from "@/features/dashboard/TaskCard";
 import {
   AlertCircle,
   AlertTriangle,
@@ -58,7 +58,7 @@ const statsData = [
   },
 ];
 
-export const activities: Activity[] = [
+export const activities: DashboardType[] = [
   {
     id: "1",
     type: "Due Today",
@@ -72,6 +72,15 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <CalendarClock size={18} />,
+
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "2",
@@ -85,6 +94,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <AlertTriangle size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "3",
@@ -98,6 +115,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <Clock size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "4",
@@ -111,6 +136,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <PhoneCall size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "5",
@@ -124,6 +157,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <CheckCircle size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "6",
@@ -137,6 +178,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <CalendarClock size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "7",
@@ -150,6 +199,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <Clock size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "8",
@@ -163,6 +220,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <PhoneCall size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "9",
@@ -176,6 +241,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <AlertTriangle size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
   {
     id: "10",
@@ -189,6 +262,14 @@ export const activities: Activity[] = [
     ],
     timestamp: new Date(),
     icon: <CheckCircle size={18} />,
+    invitees: "john@example.com",
+    taskType: "Regular",
+    videoPlatform: "Google Meet",
+    endDate: new Date().toISOString().slice(0, 16),
+    resources: "https://example.com/resource",
+    tags: "urgent, client",
+    repeat: "Daily",
+    reminder: "5min",
   },
 ];
 
@@ -217,10 +298,9 @@ const Dashboard = () => {
   return (
     <section className="w-full">
       <DashboardTopSection
-        title="Dashboard"
+        title="View Dashboard"
         description="Monitor your activities, track progress, and manage tasks efficiently."
-        buttonText="Create Task"
-        action={() => navigate("/create-task")}
+        buttonText="view archives"
       />
 
       <StatCards stats={statsData} />
@@ -243,10 +323,10 @@ const Dashboard = () => {
               />
 
               <CommonButton
-                onClick={() => navigate("/follow-ups")}
+                onClick={() => navigate("/admin/follow-ups")}
                 className="w-full sm:w-auto "
               >
-                Follow-ups
+                F/U
               </CommonButton>
             </div>
           </div>

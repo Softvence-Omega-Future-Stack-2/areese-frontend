@@ -4,8 +4,8 @@ const AccountPanel = () => {
   return (
     <div className="bg-white rounded-2xl border border-border shadow-sm p-6">
       <h3 className="font-bold text-text mb-1">Account</h3>
-      <div className="w-full h-px bg-bg my-3" />
-      <p className="text-sm text-text/50 mb-5">
+      <div className="w-full h-px bg- my-3" />
+      <p className="text-sm text-text mb-5">
         View payment history via Stripe/PayPal links, export data, or manage
         your account.
       </p>

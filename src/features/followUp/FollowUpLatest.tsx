@@ -2,9 +2,9 @@ import ButtonWithIcon from "@/components/shared/ButtonWithIcon";
 import CommonButton from "@/components/shared/CommonButton";
 import CommonSelect from "@/components/shared/CommonSelect";
 import CustomCheckbox from "@/components/shared/CustomCheckbox";
-import DashboardSearch from "@/components/shared/DashboardSearch";
 import DateTimeInput from "@/components/shared/DateTimeInput";
 import SectionHeader from "@/components/shared/SectionHeader";
+import type { RootState } from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link2 } from "lucide-react";
 import { useState } from "react";
@@ -12,9 +12,39 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { FaPlus } from "react-icons/fa6";
 import { FiTrash2 } from "react-icons/fi";
 import { IoIosLink } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { inputClass } from "../task/CreateTaskForm";
-
+import { inputClass } from "../task/CreateDashboardForm";
+const dashboardItems = [
+  { value: "sales", label: "Sales - March 04, 2026" },
+  {
+    value: "client-discussion",
+    label: "Client Project Discussion - March 10, 2026",
+  },
+  { value: "invoice", label: "Send Invoice to Client - March 12, 2026" },
+  {
+    value: "sprint-planning",
+    label: "Sprint Planning Meeting - March 15, 2026",
+  },
+  {
+    value: "marketing-review",
+    label: "Marketing Campaign Review - March 18, 2026",
+  },
+  { value: "db-maintenance", label: "Database Maintenance - March 20, 2026" },
+  { value: "weekly-report", label: "Prepare Weekly Report - March 22, 2026" },
+  { value: "product-demo-1", label: "Product Demo Session - March 24, 2026" },
+  { value: "product-demo-2", label: "Product Demo Session - March 26, 2026" },
+  {
+    value: "update-landing",
+    label: "Update Website Landing Page - March 28, 2026",
+  },
+  { value: "onboarding", label: "User Onboarding Session - March 30, 2026" },
+  {
+    value: "support-followup",
+    label: "Support Ticket Follow-Up - April 02, 2026",
+  },
+];
 function ErrorMsg({ msg }: { msg?: string }) {
   return msg ? <p className="text-red-500 text-xs mt-1">{msg}</p> : null;
 }
@@ -66,8 +96,22 @@ const FollowUpLatest = () => {
   const [videoPlatform, setVideoPlatform] = useState("Google Meet");
   const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectDashboard, setSelectDashboard] = useState("bobby");
-  const [selectMonth, setSelectMonth] = useState("january");
+  const [selectDashboard, setSelectDashboard] = useState("");
+
+  // find selected item
+  const selectedDashboard = dashboardItems.find(
+    (item) => item.value === selectDashboard,
+  );
+
+  // split title + date
+  const title =
+    selectedDashboard?.label?.split(" - ")[0] || "No Dashboard Selected";
+  const createdDate = selectedDashboard?.label?.split(" - ")[1] || "—";
+
+  const { dashboard: selectedDashboardData } = useSelector(
+    (state: RootState) => state.dashboard,
+  );
+
   const {
     register,
     control,
@@ -75,7 +119,24 @@ const FollowUpLatest = () => {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: { keypoints: [{ value: "" }] },
+    defaultValues: selectedDashboardData
+      ? {
+          title: selectedDashboardData.title,
+          invitees: selectedDashboardData.invitees,
+          taskType: selectedDashboardData.taskType,
+          videoPlatform: selectedDashboardData.videoPlatform,
+          endDate: selectedDashboardData.endDate,
+          resources: selectedDashboardData.resources,
+          tags: selectedDashboardData.tags,
+          repeat: selectedDashboardData.repeat,
+          reminder: selectedDashboardData.reminder,
+          keypoints: selectedDashboardData.description.map((item: string) => ({
+            value: item,
+          })),
+        }
+      : {
+          keypoints: [{ value: "" }],
+        },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -105,6 +166,8 @@ const FollowUpLatest = () => {
     });
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className=" h-full  ">
       <form
@@ -118,40 +181,12 @@ const FollowUpLatest = () => {
             title="Create a Follow-Up"
             description="Add a follow-up connected to an existing dashboard."
           />
-          <div className="flex items-center gap-1">
-            <p className=" hidden sm:block text-sm text-text">History</p>
-            <DashboardSearch className="" />
-            <CommonSelect
-              item={[
-                { value: "january", label: "January" },
-                { value: "february", label: "February" },
-                { value: "march", label: "March" },
-                { value: "april", label: "April" },
-                { value: "may", label: "May" },
-                { value: "june", label: "June" },
-                { value: "july", label: "July" },
-                { value: "august", label: "August" },
-                { value: "september", label: "September" },
-                { value: "october", label: "October" },
-                { value: "november", label: "November" },
-                { value: "december", label: "December" },
-              ]}
-              value={selectMonth}
-              onValueChange={(val) => setSelectMonth(val)}
-              placeholder="Select month"
-              w={120}
-            />
-          </div>
         </div>
 
         <div className="pt-2">
-          <label className={inputClass.label}>Link Dashboard</label>
+          <label className={inputClass.label}>Select Dashboard</label>
           <CommonSelect
-            item={[
-              { value: "bobby", label: "Bobby Johnson's Blue Website" },
-              { value: "marketing", label: "Marketing Dashboard" },
-              { value: "sales", label: "Sales Q4 2025" },
-            ]}
+            item={dashboardItems}
             value={selectDashboard}
             onValueChange={(val) => setSelectDashboard(val)}
             placeholder="Select dashboard"
@@ -165,15 +200,16 @@ const FollowUpLatest = () => {
               <p className="text-[10px] font-bold text-orange-500 uppercase tracking-wider">
                 Linked Dashboard
               </p>
-              <p className="text-sm font-bold text-text mt-0.5">
-                {selectDashboard} Blue Website
-              </p>
+
+              <p className="text-sm font-bold text-text mt-0.5">{title}</p>
+
               <p className="text-xs text-text/50 mt-0.5">
-                Created: October 2025
+                Created: {createdDate}
               </p>
+
               <p className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
-                <IoIosLink size={10} className="text-today-accent" /> Key
-                points: brandihomepage, pricing
+                <IoIosLink size={10} className="text-today-accent" />
+                Key points: branding, homepage, pricing
               </p>
             </div>
           </div>
@@ -394,7 +430,9 @@ const FollowUpLatest = () => {
 
         <div className="flex justify-end gap-2 mt-6">
           <CommonButton>Create Follow-Up</CommonButton>
-          <CommonButton variant="secondary">Cancel</CommonButton>
+          <CommonButton variant="secondary" onClick={() => navigate(-1)}>
+            Cancel
+          </CommonButton>
         </div>
       </form>
     </div>

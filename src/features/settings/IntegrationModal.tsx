@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 export type IntegrationName = "Zoom" | "Google Meet" | "Stripe" | "PayPal";
 
 interface ModalField {

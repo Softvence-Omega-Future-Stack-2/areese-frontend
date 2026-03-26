@@ -1,6 +1,6 @@
 import CommonButton from "@/components/shared/CommonButton";
 import CommonHeader from "@/components/shared/CommonHeader";
-import { inputClass } from "@/features/task/CreateTaskForm";
+import { inputClass } from "@/features/task/CreateDashboardForm";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 

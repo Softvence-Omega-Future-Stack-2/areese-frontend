@@ -1,4 +1,5 @@
 import CommonSelect from "@/components/shared/CommonSelect";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import AccountPanel from "./AccountPanel";
@@ -81,12 +82,10 @@ const SettingsPage = () => {
           <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden mb-6 w-full">
             <div className="px-6 py-5 flex items-center gap-2">
               <IoSettingsOutline className="text-2xl" />
-              <h2 className="text-lg font-bold text-text">
-                {titleMap[active]}
-              </h2>
+              <SectionHeader title={titleMap[active]} className="pb-0!" />
             </div>
-            <div className="px-6 pb-4 bg-blue-50 border-t border-blue-100">
-              <p className="text-sm text-text/50 py-3">
+            <div className="px-6 pb-4 bg-brand ">
+              <p className="text-sm text-white py-3">
                 Configure your workspace. Changes are saved automatically.
               </p>
             </div>

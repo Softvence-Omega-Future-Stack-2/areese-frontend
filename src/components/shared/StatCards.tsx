@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { TrendingDown, TrendingUp } from "lucide-react";
 import React from "react";
@@ -21,14 +19,21 @@ interface StatCardsProps {
   stats: StatCard[];
 }
 
+export const brandColors = [
+  "bg-brand",
+  "bg-followup-bg",
+  "bg-upcoming-bg",
+  "bg-late-bg",
+];
 export const StatCards: React.FC<StatCardsProps> = ({ stats }) => {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {stats.map((stat) => {
+      {stats.map((stat, i) => {
+        const bgColor = brandColors[i % brandColors.length];
         return (
           <div
             key={stat.id}
-            className="group relative overflow-hidden rounded-xl border border-border bg-white p-6 transition-all "
+            className={`group relative overflow-hidden rounded-xl border border-border ${bgColor}  p-6 transition-all `}
           >
             {/* Background decoration */}
             <div
@@ -51,10 +56,8 @@ export const StatCards: React.FC<StatCardsProps> = ({ stats }) => {
                 {stat.trend && (
                   <div
                     className={cn(
-                      "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold",
-                      stat.trend.isPositive
-                        ? "bg-green/10 text-green"
-                        : "bg-late-accent text-white",
+                      "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-white",
+                      stat.trend.isPositive ? "bg-green " : "bg-late-accent ",
                     )}
                   >
                     {stat.trend.isPositive ? (
@@ -69,14 +72,14 @@ export const StatCards: React.FC<StatCardsProps> = ({ stats }) => {
 
               {/* Value and label */}
               <div className="mt-4">
-                <p className="text-sm font-medium text-text/50">{stat.label}</p>
+                <p className="text-sm font-medium text-text">{stat.label}</p>
                 <p className="mt-2 text-3xl font-bold text-text">
                   {stat.value}
                 </p>
               </div>
 
               {/* Footer text */}
-              <p className="mt-4 text-xs text-text/50">vs. last month</p>
+              <p className="mt-4 text-xs text-text">vs. last month</p>
             </div>
           </div>
         );

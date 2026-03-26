@@ -1,10 +1,13 @@
 import CommonButton from "@/components/shared/CommonButton";
 import CommonHeader from "@/components/shared/CommonHeader";
 import CommonSelect from "@/components/shared/CommonSelect";
+import type { RootState } from "@/store/store";
 import { Copy } from "lucide-react";
 import { useState } from "react";
-import image from "../../assets/images/profile.png";
-import { inputClass } from "../task/CreateTaskForm";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import logo from "../../assets/images/profile.png";
+import { inputClass } from "../task/CreateDashboardForm";
 import { TimeInput } from "./TimeInput";
 function OrangeCheckbox({
   checked,
@@ -82,6 +85,7 @@ const DURATION_OPTIONS = [
 ];
 
 const SubscriberPanel = () => {
+  const { image } = useSelector((state: RootState) => state.dashboard);
   const [schedule, setSchedule] =
     useState<Record<string, DaySchedule>>(INITIAL_SCHEDULE);
   const [selectedPackage, setSelectedPackage] = useState("Consulting Session");
@@ -106,13 +110,18 @@ const SubscriberPanel = () => {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(bookingLink).catch(() => {});
+    toast.success("Copied");
   };
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-border p-5 w-full">
       <div className=" flex flex-col  gap-4 items-center pb-6">
         <div className="w-16 h-16 border border-border rounded-full">
-          <img className="w-full h-full   object-contain" src={image} alt="" />
+          <img
+            className="w-full h-full   object-cover rounded-full"
+            src={image || logo}
+            alt=""
+          />
         </div>
         <div>
           <h2 className="text-center text-sm font-bold text-text/50 uppercase tracking-widest mb-1">

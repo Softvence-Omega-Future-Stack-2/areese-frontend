@@ -2,7 +2,7 @@ import CommonButton from "@/components/shared/CommonButton";
 import { motion } from "framer-motion";
 import { Mail, MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 
 const ContactPage = () => {
   const navigate = useNavigate();

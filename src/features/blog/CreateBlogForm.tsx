@@ -2,7 +2,7 @@ import CommonButton from "@/components/shared/CommonButton";
 import CommonSelect from "@/components/shared/CommonSelect";
 import SectionHeader from "@/components/shared/SectionHeader";
 import type { FC } from "react";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 import { blogs } from "./BlogList";
 import CKStyleEditor from "./CKStyleEditor";
 

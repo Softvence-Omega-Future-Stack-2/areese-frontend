@@ -1,4 +1,6 @@
 import CommonButton from "@/components/shared/CommonButton";
+import SectionHeader from "@/components/shared/SectionHeader";
+import { brandColors } from "@/components/shared/StatCards";
 import { useState } from "react";
 import Badge from "./Badge";
 import type { IntegrationName } from "./IntegrationModal";
@@ -68,31 +70,38 @@ const IntegrationsPanel = () => {
         />
       )}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {items.map((integration) => (
-          <div
-            key={integration.name}
-            className="bg-white rounded-2xl border border-border shadow-sm p-5 flex flex-col gap-3 hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-gray-800 text-base">
-                {integration.name}
-              </h3>
-              <Badge connected={integration.connected} />
-            </div>
-            <div className="w-8 h-0.5 bg-gray-200 rounded" />
-            <p className="text-sm text-gray-500 flex-1">
-              {integration.description}
-            </p>
+        {items.map((integration, i) => {
+          const bgColor = brandColors[i % brandColors.length];
 
-            <CommonButton
-              onClick={() =>
-                handleConnect(integration.name, integration.connected)
-              }
+          return (
+            <div
+              key={integration.name}
+              className={`${bgColor} rounded-2xl border border-border shadow-sm p-5 flex flex-col gap-3 hover:shadow-md transition-shadow`}
             >
-              {integration.connected ? "Disconnect" : "Connect"}
-            </CommonButton>
-          </div>
-        ))}
+              <div className="flex items-center justify-between">
+                <SectionHeader title={integration.name} />
+                <Badge connected={integration.connected} />
+              </div>
+
+              <div
+                className="w-8 h-0.5 rounded"
+                style={{ backgroundColor: bgColor }}
+              />
+
+              <p className="text-sm text-text flex-1">
+                {integration.description}
+              </p>
+
+              <CommonButton
+                onClick={() =>
+                  handleConnect(integration.name, integration.connected)
+                }
+              >
+                {integration.connected ? "Disconnect" : "Connect"}
+              </CommonButton>
+            </div>
+          );
+        })}
       </div>
     </>
   );

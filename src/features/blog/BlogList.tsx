@@ -162,7 +162,7 @@ export const BlogList = () => {
                     <td className={` ${tableDesign.td} hidden md:table-cell  `}>
                       <div>
                         <span
-                          className={`${assessment.status === "active" ? "bg-info  " : "bg-cta "} text-text px-3 py-1 w-fit mx-auto rounded-full text-xs font-medium hidden md:block `}
+                          className={`${assessment.status === "active" ? "bg-info  " : "bg-cta "} text-white px-3 py-1 w-fit mx-auto rounded-full text-xs font-medium hidden md:block `}
                         >
                           {assessment.status}
                         </span>

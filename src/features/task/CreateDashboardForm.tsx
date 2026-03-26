@@ -68,7 +68,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const CreateTaskForm = () => {
+const CreateDashboardForm = () => {
   const navigate = useNavigate();
 
   const [taskType, setTaskType] = useState("Regular");
@@ -129,27 +129,27 @@ const CreateTaskForm = () => {
   return (
     <div className="w-full">
       <DashboardTopSection
-        title="Create A Task"
-        description="Add a new task to your task list"
+        title="Create A Dashboard"
+        description="Add a new dashboard to your dashboard list"
       />
 
       <form onSubmit={handleSubmit(onSubmit)} className={inputClass.form}>
         <div>
           <SectionHeader
-            title="Create a task"
-            description="Add a new task to your task list"
+            title="Create a dashboard"
+            description="Add a new dashboard to your dashboard list"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Title */}
           <div>
-            <label className={inputClass.label}>Task Title</label>
+            <label className={inputClass.label}>Dashboard Title</label>
             <input
               {...register("title")}
               className={inputClass.input}
               type="text"
-              placeholder="Enter task title"
+              placeholder="Enter dashboard title"
             />
             {errors.title && (
               <p className={inputClass.error}>{errors.title.message}</p>
@@ -359,7 +359,7 @@ const CreateTaskForm = () => {
 
         <div className="flex flex-col sm:flex-row justify-end gap-2 mt-6">
           <CommonButton type="submit" variant="primary">
-            Create Task
+            Create Dashboard
           </CommonButton>
 
           <CommonButton type="button" variant="secondary">
@@ -367,7 +367,7 @@ const CreateTaskForm = () => {
           </CommonButton>
           <CommonButton
             type="button"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/admin/dashboard")}
             variant="secondary"
           >
             Cancel
@@ -378,4 +378,4 @@ const CreateTaskForm = () => {
   );
 };
 
-export default CreateTaskForm;
+export default CreateDashboardForm;

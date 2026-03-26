@@ -5,7 +5,7 @@ const ProfileSettings = () => {
   return (
     <div>
       <DashboardTopSection
-        title="Profile Settings"
+        title="Profile"
         description="View and manage all your profile settings efficiently"
       />
       <ProfileSettingsForm />

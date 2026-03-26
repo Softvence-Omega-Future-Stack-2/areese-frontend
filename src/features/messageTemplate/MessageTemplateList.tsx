@@ -1,4 +1,5 @@
 import SectionHeader from "@/components/shared/SectionHeader";
+import { brandColors } from "@/components/shared/StatCards";
 import { Check, ChevronDown, Copy } from "lucide-react";
 import { useState } from "react";
 import { templateData } from "./data";
@@ -55,8 +56,10 @@ const MessageTemplateList = () => {
             >
               <button
                 onClick={() => toggle(section.id)}
-                className={`w-full flex items-center cursor-pointer justify-between px-4 py-3 text-left transition-colors duration-200 ${
-                  isOpen ? "bg-cta" : "bg-white hover:bg-cta/90"
+                className={`w-full flex items-center cursor-pointer justify-between px-4 py-3 text-left transition-colors duration-200 group ${
+                  isOpen
+                    ? "bg-cta"
+                    : "bg-white hover:bg-cta/90 hover:text-white"
                 }`}
               >
                 <span
@@ -65,8 +68,10 @@ const MessageTemplateList = () => {
                   {section.label}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4  transition-transform duration-300 ${
-                    isOpen ? "rotate-180 text-white" : " text-gray-700"
+                  className={`w-4 h-4   transition-transform duration-300 ${
+                    isOpen
+                      ? "rotate-180 text-white"
+                      : " text-text group-hover:text-white "
                   }`}
                 />
               </button>
@@ -79,22 +84,26 @@ const MessageTemplateList = () => {
               >
                 <div className="bg-white p-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {section.templates.map((tpl) => (
-                      <div
-                        key={tpl.title}
-                        className="border border-border rounded-lg p-4 bg-50 flex flex-col gap-3"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <h3 className="text-sm font-semibold text-text leading-tight">
-                            {tpl.title}
-                          </h3>
-                          <CopyButton text={tpl.body} />
+                    {section.templates.map((tpl, i) => {
+                      const bgColor = brandColors[i % brandColors.length];
+
+                      return (
+                        <div
+                          key={tpl.title}
+                          className={`${bgColor} border border-border rounded-lg p-4 bg-50 flex flex-col gap-3`}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <h3 className="text-sm font-semibold text-text leading-tight">
+                              {tpl.title}
+                            </h3>
+                            <CopyButton text={tpl.body} />
+                          </div>
+                          <p className="text-xs text-text leading-relaxed">
+                            {tpl.body}
+                          </p>
                         </div>
-                        <p className="text-xs text-text/50 leading-relaxed">
-                          {tpl.body}
-                        </p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

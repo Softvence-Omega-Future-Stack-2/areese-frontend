@@ -2,7 +2,7 @@ import CommonButton from "@/components/shared/CommonButton";
 import CommonSelect from "@/components/shared/CommonSelect";
 import { AlertCircle, X } from "lucide-react";
 import { useState } from "react";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 
 interface props {
   onClose: () => void;

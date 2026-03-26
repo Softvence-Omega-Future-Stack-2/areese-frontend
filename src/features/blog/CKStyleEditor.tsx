@@ -46,7 +46,7 @@ import {
   MdSubscript,
   MdSuperscript,
 } from "react-icons/md";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface TBtnProps {

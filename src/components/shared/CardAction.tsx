@@ -16,7 +16,7 @@ const CardAction: React.FC<CardActionProps> = ({
     <div className=" flex items-center text-xl  gap-2">
       {onDetails && (
         <span
-          onClick={() => onDetails}
+          onClick={onDetails}
           className="text-warning p-1 rounded-md cursor-pointer border border-warning hover:bg-warning hover:text-white transition-all"
         >
           <FiEye />

@@ -1,7 +1,7 @@
 import CommonButton from "@/components/shared/CommonButton";
 import SectionHeader from "@/components/shared/SectionHeader";
 import type { FC } from "react";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 
 interface CreatePlanProps {
   onCancel: () => void;

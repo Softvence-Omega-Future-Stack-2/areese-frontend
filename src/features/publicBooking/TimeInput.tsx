@@ -1,5 +1,3 @@
-import { inputClass } from "../task/CreateTaskForm";
-
 interface TimeInputProps {
   value: string;
   onChange: (v: string) => void;
@@ -38,7 +36,7 @@ export function TimeInput({ value, onChange }: TimeInputProps) {
         type="time"
         value={inputValue}
         onChange={handleChange}
-        className={inputClass.input}
+        className={` w-full border border-border bg-white rounded-md p-1.5 sm:p-3.5 outline-none text-text text-xs`}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import CommonButton from "@/components/shared/CommonButton";
 import SectionHeader from "@/components/shared/SectionHeader";
 import type { FC } from "react";
-import { inputClass } from "../task/CreateTaskForm";
+import { inputClass } from "../task/CreateDashboardForm";
 
 interface CreatePlanProps {
   onCancel: () => void;
@@ -63,7 +63,7 @@ const CreatePlan: FC<CreatePlanProps> = ({ onCancel }) => {
         </div>
         <div className="flex items-center gap-4">
           <CommonButton>Create plan</CommonButton>
-          <CommonButton onClick={() => onCancel} variant="secondary">
+          <CommonButton onClick={onCancel} variant="secondary">
             Cancel
           </CommonButton>
         </div>

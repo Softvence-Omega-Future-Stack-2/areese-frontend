@@ -1,4 +1,4 @@
-import { inputClass } from "@/features/task/CreateTaskForm";
+import { inputClass } from "@/features/task/CreateDashboardForm";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
 interface DateInputProps {
