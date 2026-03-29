@@ -169,7 +169,7 @@ const FollowUpLatest = () => {
   const navigate = useNavigate();
 
   return (
-    <div className=" h-full  ">
+    <div className="  ">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={
