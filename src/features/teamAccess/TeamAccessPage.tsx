@@ -1,9 +1,11 @@
 import CommonButton from "@/components/shared/CommonButton";
 import SectionHeader from "@/components/shared/SectionHeader";
 import { useState } from "react";
+import { GiCheckMark } from "react-icons/gi";
 import { toast } from "react-toastify";
 import { inputClass } from "../task/CreateDashboardForm";
 
+import { brandColors } from "@/components/shared/StatCards";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -128,60 +130,69 @@ export default function TeamAccessPage() {
       </div>
 
       <div className="mt-5 space-y-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {collaborators.map((c, i) => (
-          <div key={c.id} className="border rounded-xl p-4 bg-white relative">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-1">
-                <span className="bg-cta text-white w-6 h-6 flex items-center justify-center rounded-full text-sm">
-                  {i + 1}
-                </span>
-                <SectionHeader title="Collaborator Added" className="pb-0!" />
-                <span className="text-green">✓</span>
+        {collaborators.map((c, i) => {
+          const bgColor = brandColors[i % brandColors.length];
+
+          return (
+            <div
+              key={c.id}
+              className={`border rounded-xl p-4  relative ${bgColor}`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-1">
+                  <span className="bg-cta text-white w-6 h-6 flex items-center justify-center rounded-full text-sm">
+                    {i + 1}
+                  </span>
+                  <SectionHeader title="Collaborator Added" className="pb-0!" />
+                  <span className="text-cta">
+                    <GiCheckMark />
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <div className="flex items-center gap-1">
-              <p className="text-sm text-text/50">Name:</p>
-              <p className="font-medium">{c.name}</p>
-            </div>
+              <div className="flex items-center gap-1">
+                <p className="text-sm text-text">Name:</p>
+                <p className="text-sm text-text">{c.name}</p>
+              </div>
 
-            <div className="flex items-center gap-1">
-              <p className="text-sm text-text/50">Password:</p>
-              <p className="font-medium">{c.password}</p>
-            </div>
+              <div className="flex items-center gap-1">
+                <p className="text-sm text-text">Password:</p>
+                <p className="text-sm text-text">{c.password}</p>
+              </div>
 
-            <div className="flex items-center gap-1">
-              <p className="text-sm text-text/50">username:</p>
-              <p className="font-medium">{c.username}</p>
-            </div>
+              <div className="flex items-center gap-1">
+                <p className="text-sm text-text">username:</p>
+                <p className="text-sm text-text">{c.username}</p>
+              </div>
 
-            <div className="mt-2">
-              <label className={inputClass.label}>Email</label>
-              <input
-                type="text"
-                className={`${inputClass.input} cursor-text`}
-                value={c.email}
-                readOnly
-              />
-            </div>
+              <div className="mt-2">
+                <label className={inputClass.label}>Email</label>
+                <input
+                  type="text"
+                  className={`${inputClass.input} cursor-text`}
+                  value={c.email}
+                  readOnly
+                />
+              </div>
 
-            <div className="mt-2">
-              <CommonButton
-                onClick={() =>
-                  copyToClipboard(
-                    `https://yourapp.com/login?email=${c.email}&tempPassword=${c.password}`,
-                  )
-                }
-              >
-                Copy Login Link
-              </CommonButton>
-            </div>
+              <div className="my-4">
+                <CommonButton
+                  onClick={() =>
+                    copyToClipboard(
+                      `https://yourapp.com/login?email=${c.email}&tempPassword=${c.password}`,
+                    )
+                  }
+                >
+                  Copy Login Link
+                </CommonButton>
+              </div>
 
-            <p className="text-sm text-text/50 mt-2">
-              Send the access link to {c.name} to log in.
-            </p>
-          </div>
-        ))}
+              <p className="text-sm text-text ">
+                Send the access link to {c.name} to log in.
+              </p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

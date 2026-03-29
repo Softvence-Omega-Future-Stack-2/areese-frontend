@@ -20,10 +20,10 @@ interface StatCardsProps {
 }
 
 export const brandColors = [
-  "bg-brand",
+  "bg-today-bg",
   "bg-followup-bg",
-  "bg-upcoming-bg",
   "bg-late-bg",
+  "bg-upcoming-bg",
 ];
 export const StatCards: React.FC<StatCardsProps> = ({ stats }) => {
   return (
@@ -57,7 +57,15 @@ export const StatCards: React.FC<StatCardsProps> = ({ stats }) => {
                   <div
                     className={cn(
                       "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-white",
-                      stat.trend.isPositive ? "bg-green " : "bg-late-accent ",
+                      stat.label === "Due Today"
+                        ? "bg-today-accent "
+                        : stat.label === "Late"
+                          ? "bg-late-accent "
+                          : stat.label === "Upcoming"
+                            ? "bg-upcoming-accent "
+                            : stat.label === "Follow Up"
+                              ? "bg-followup-accent "
+                              : "bg-completed-accent ",
                     )}
                   >
                     {stat.trend.isPositive ? (

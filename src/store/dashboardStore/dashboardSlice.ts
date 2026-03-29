@@ -1,4 +1,4 @@
-import type { DashboardType } from "@/features/dashboard/TaskCard";
+import type { DashboardType } from "@/features/dashboard/DashBoardCard";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface DashboardState {
@@ -23,7 +23,7 @@ const dashboardSlice = createSlice({
     setBusinessName(state, action: PayloadAction<string>) {
       state.businessName = action.payload;
     },
-    setDashboard(state, action: PayloadAction<DashboardType>) {
+    setDashboard(state, action: PayloadAction<DashboardType | null>) {
       state.dashboard = action.payload;
     },
   },

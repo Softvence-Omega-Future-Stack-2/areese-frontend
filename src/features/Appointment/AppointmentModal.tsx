@@ -17,7 +17,7 @@ const AppointmentModal = ({ appointment, onClose }: AppointmentModalProps) => {
 
   const statusColor = {
     Scheduled: "bg-blue-100 text-blue-600",
-    Completed: "bg-green-100 text-green-600",
+    Completed: "completed-bg-100 text-green-600",
     Pending: "bg-yellow-100 text-yellow-600",
     Cancelled: "bg-red-100 text-red-600",
   };

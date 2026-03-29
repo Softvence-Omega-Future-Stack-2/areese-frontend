@@ -1,8 +1,11 @@
 import CommonWrapper from "@/components/shared/CommonWrapper";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { AiOutlineMinus } from "react-icons/ai";
+import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import image from "../../assets/images/logo.png";
+import image from "../../assets/images/logo.jpg";
+
 const features = [
   { icon: "📋", label: "Dashboards & Tasks" },
   { icon: "📌", label: "Key Points & Notes" },
@@ -52,17 +55,22 @@ export default function HomePage() {
     window.addEventListener("scroll", scroll);
     return () => window.removeEventListener("scroll", scroll);
   }, []);
-
+  const brandColors = [
+    "bg-today-bg",
+    "bg-followup-bg",
+    "bg-upcoming-bg",
+    "bg-late-bg",
+  ];
   return (
-    <div className="bg-bg text-text overflow-x-hidden">
+    <div className="bg-brand text-text overflow-x-hidden">
       <nav
         className={`fixed w-full z-50 flex justify-between items-center px-10 py-4 transition
-        ${scrollY > 20 ? "bg-white/80 backdrop-blur border-b" : ""}`}
+        ${scrollY > 20 ? "bg-brand/80 backdrop-blur  border-b border-info/20" : ""}`}
       >
         <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-          <div className="  h-10 ">
+          <div className=" w-20  h-18">
             <img
-              className="w-full h-full object-contain "
+              className="w-full h-full object-cover rounded-2xl "
               src={image}
               alt="logo"
             />
@@ -70,10 +78,13 @@ export default function HomePage() {
           <span className=" hidden sm:block">Dont forget</span>
         </Link>
 
-        <div className="hidden md:flex gap-10 text-sm font-medium text-gray-600">
+        <div className="hidden md:flex gap-10 text-sm font-medium text-text">
           <a href="#faq" className="hover:text-info cursor-pointer">
             FAQs
           </a>
+          <Link to="/price" className="hover:text-info cursor-pointer">
+            Pricing
+          </Link>
           <Link to="/contact" className="hover:text-info cursor-pointer">
             Contact
           </Link>
@@ -103,7 +114,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center gap-2 bg-[#e6e9ff] text-info px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <div className="inline-flex items-center gap-2 bg-bg text-info px-4 py-2 rounded-full text-sm font-semibold mb-6">
                 <span className="w-2 h-2 bg-info rounded-full"></span>
                 Now live — lock in $30/month
               </div>
@@ -115,7 +126,7 @@ export default function HomePage() {
                 <br />a thing.
               </h1>
 
-              <p className="text-lg text-gray-600 max-w-md mb-10">
+              <p className="text-lg text-text max-w-md mb-10">
                 Effortlessly manage your tasks, bookings and reminders all from
                 one beautiful dashboard.
               </p>
@@ -124,13 +135,9 @@ export default function HomePage() {
                 <button className="px-8 py-4 bg-today-accent text-white rounded-full font-bold cursor-pointer">
                   Get Started →
                 </button>
-
-                <button className="px-8 py-4 bg-white border rounded-full cursor-pointer">
-                  Watch Demo
-                </button>
               </div>
 
-              <p className="text-sm text-text/50 mt-5">
+              <p className="text-sm text-text mt-5">
                 No setup fees · Cancel anytime · $30/month forever
               </p>
             </motion.div>
@@ -220,21 +227,25 @@ export default function HomePage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((f, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white p-6 rounded-xl shadow-sm border"
-              >
-                <div className="text-3xl mb-4">{f.icon}</div>
-                <p className="font-semibold">{f.label}</p>
-              </motion.div>
-            ))}
+            {features.map((f, i) => {
+              const bgColor = brandColors[i % brandColors.length];
+
+              return (
+                <motion.div
+                  key={i}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className={`${bgColor} p-6 rounded-xl shadow-sm border`}
+                >
+                  <div className="text-3xl mb-4">{f.icon}</div>
+                  <p className="font-semibold">{f.label}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </section>
       </CommonWrapper>
 
-      <section id="signup" className="py-24 bg-indigo-50 px-10">
+      <section id="signup" className="py-24 bg-bg px-10">
         <div className="max-w-[1400px] mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-indigo-500 font-bold uppercase text-sm mb-3">
@@ -247,13 +258,13 @@ export default function HomePage() {
               All features.
             </h2>
 
-            <p className="text-gray-600 mb-6">
+            <p className="text-text/50 mb-6">
               Early subscribers lock in $30/month forever.
             </p>
 
             <div className="flex items-end gap-2">
               <span className="text-6xl font-black text-today-accent">$30</span>
-              <span className="text-gray-500 mb-2">/month</span>
+              <span className="text-text/50 mb-2">/month</span>
             </div>
           </div>
 
@@ -286,18 +297,20 @@ export default function HomePage() {
               <div
                 key={i}
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="border rounded-xl cursor-pointer"
+                className="border border-info rounded-xl cursor-pointer bg-bg"
               >
                 <div className="flex justify-between p-5 font-semibold">
                   {faq.q}
-                  <span>{openFaq === i ? "-" : "+"}</span>
+                  <span className="text-xl">
+                    {openFaq === i ? <AiOutlineMinus /> : <FiPlus />}
+                  </span>
                 </div>
 
                 {openFaq === i && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="px-5 pb-5 text-gray-600 text-sm"
+                    className="px-5 pb-5 text-text/50 text-sm"
                   >
                     {faq.a}
                   </motion.div>
@@ -326,7 +339,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="bg-black text-white text-sm  py-12 text-center">
+      <footer className="bg-black text-white text-sm  pb-12 text-center">
         © 2026 Don't Forget — All rights reserved.
       </footer>
     </div>

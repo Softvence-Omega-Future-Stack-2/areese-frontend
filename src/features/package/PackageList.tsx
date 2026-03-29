@@ -18,6 +18,8 @@ const tableHeaders = [
   { label: "Name", align: "text-left  " },
   { label: "Price", align: "text-left hidden  sm:table-cell" },
   { label: "Duration (min)", align: "text-left hidden md:table-cell" },
+  { label: "Duration Note", align: "text-left hidden md:table-cell" },
+  { label: "Service Fee", align: "text-left hidden md:table-cell" },
   { label: "Edit", align: "text-left " },
   { label: "Delete", align: "text-left " },
 ];
@@ -26,6 +28,9 @@ export interface PackageItem {
   name: string;
   price: number;
   duration: number;
+  durationNote: string;
+  description: string;
+  serviceFee?: number; // optional
 }
 
 export const packageData: PackageItem[] = [
@@ -34,30 +39,90 @@ export const packageData: PackageItem[] = [
     name: "Starter Session",
     price: 100,
     duration: 15,
+    durationNote: "Quick intro session",
+    serviceFee: 10,
+    description: "Short session for quick guidance",
   },
   {
     id: 2,
     name: "Basic Consultation",
     price: 200,
     duration: 30,
+    durationNote: "Standard consultation",
+    serviceFee: 20,
+    description: "Basic consultation with client",
   },
   {
     id: 3,
     name: "Professional Session",
     price: 300,
     duration: 45,
+    durationNote: "Depends on complexity",
+    serviceFee: 0,
+    description: "Detailed professional session",
   },
   {
     id: 4,
     name: "Premium Coaching",
     price: 400,
     duration: 60,
+    durationNote: "Flexible timing available",
+    serviceFee: 50,
+    description: "Advanced coaching package",
   },
   {
     id: 5,
     name: "VIP Strategy Call",
     price: 500,
     duration: 90,
+    durationNote: "Can extend if needed",
+    serviceFee: 100,
+    description: "High-level strategy session",
+  },
+  {
+    id: 6,
+    name: "Express Help",
+    price: 120,
+    duration: 20,
+    durationNote: "Fast problem solving",
+    serviceFee: 5,
+    description: "Quick support for urgent issues",
+  },
+  {
+    id: 7,
+    name: "Standard Coaching",
+    price: 250,
+    duration: 40,
+    durationNote: "Best for regular users",
+    serviceFee: 15,
+    description: "Balanced session for most clients",
+  },
+  {
+    id: 8,
+    name: "Deep Dive Session",
+    price: 350,
+    duration: 75,
+    durationNote: "In-depth analysis",
+    serviceFee: 30,
+    description: "Detailed and comprehensive session",
+  },
+  {
+    id: 9,
+    name: "Business Strategy",
+    price: 600,
+    duration: 120,
+    durationNote: "Custom based on needs",
+    serviceFee: 80,
+    description: "Strategy planning for businesses",
+  },
+  {
+    id: 10,
+    name: "Ultimate VIP Package",
+    price: 1000,
+    duration: 180,
+    durationNote: "Fully flexible duration",
+    serviceFee: 150,
+    description: "Complete premium experience",
   },
 ];
 export const PackageList = () => {
@@ -96,8 +161,8 @@ export const PackageList = () => {
                   </td>
                 </tr>
               ) : (
-                packageData.map((assessment, index) => (
-                  <tr key={assessment.id} className={tableDesign.tr}>
+                packageData.map((packageData, index) => (
+                  <tr key={packageData.id} className={tableDesign.tr}>
                     <td className={` hidden md:table-cell ${tableDesign.td} `}>
                       <span
                         className={`px-3 py-1 w-fit mx-auto rounded-full text-xs font-medium hidden md:block `}
@@ -110,18 +175,24 @@ export const PackageList = () => {
                       onClick={() => setIsPackageModalOpen(true)}
                       className={` ${tableDesign.td}  cursor-pointer `}
                     >
-                      {assessment.name}
+                      {packageData.name}
                     </td>
 
                     <td className={` ${tableDesign.td}  hidden  sm:table-cell`}>
-                      ${assessment.price}
+                      ${packageData.price}
                     </td>
                     <td className={` ${tableDesign.td} hidden md:table-cell  `}>
-                      {assessment.duration}
+                      {packageData.duration}
+                    </td>
+
+                    <td className={` ${tableDesign.td} hidden md:table-cell  `}>
+                      {packageData.durationNote}
+                    </td>
+                    <td className={` ${tableDesign.td} hidden md:table-cell  `}>
+                      ${packageData.serviceFee}
                     </td>
                     <td className={` ${tableDesign.td}`}>
                       <div className="flex justify-center">
-                        {" "}
                         <CardAction onEdit={() => {}} />
                       </div>
                     </td>

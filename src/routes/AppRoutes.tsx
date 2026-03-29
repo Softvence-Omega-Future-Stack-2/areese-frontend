@@ -3,6 +3,7 @@ import MainLayout from "@/components/layout/MainLayout";
 import CollaboratorLayout from "@/components/layout/CollaboratorLayout";
 import ContactPage from "@/features/contactPage/ContactPage";
 import ListDetail from "@/features/dashboard/ListDetail";
+import PricingHero from "@/features/home/PricingHero";
 import BlogCategories from "@/pages/BlogCategories";
 import Blogs from "@/pages/Blogs";
 import CollaboratorHome from "@/pages/collaborator/CollaboratorHome";
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
         path: "/",
 
         element: <Home />,
+      },
+      {
+        path: "/price",
+
+        element: <PricingHero />,
       },
       {
         path: "/contact",
@@ -69,24 +75,7 @@ const router = createBrowserRouter([
       {
         path: "/collaborator",
         element: <CollaboratorLayout />,
-        children: [
-          { path: "dashboard", element: <CollaboratorHome /> },
-          { path: "create-dashboard", element: <CreateDashboard /> },
-          { path: "dashboard-details/:id", element: <ListDetail /> },
-          { path: "follow-ups", element: <FollowUps /> },
-          { path: "booking-packages", element: <Packages /> },
-          { path: "public-booking", element: <PublicBooking /> },
-          { path: "appointments", element: <ViewAppointments /> },
-          { path: "settings", element: <Settings /> },
-          { path: "message-template", element: <MessageTemplate /> },
-          { path: "team-access", element: <TeamAccess /> },
-          { path: "plans", element: <Plans /> },
-          { path: "contacts", element: <Contacts /> },
-          { path: "users", element: <Users /> },
-          { path: "blog-categories", element: <BlogCategories /> },
-          { path: "blogs", element: <Blogs /> },
-          { path: "profile", element: <ProfileSettings /> },
-        ],
+        children: [{ path: "dashboard", element: <CollaboratorHome /> }],
       },
     ],
   },

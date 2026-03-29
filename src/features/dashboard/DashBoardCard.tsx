@@ -32,30 +32,22 @@ interface ActivityFeedProps {
   title?: string;
 }
 
-const typeColors: Record<DashboardType["type"], string> = {
-  "Due Today": "bg-cta text-white",
-  late: "bg-danger text-white",
-  Upcoming: "bg-upcoming text-white",
-  "Follow Up": "bg-info text-white ",
-  Completed: "bg-green text-white ",
-};
-
 const iconColors: Record<DashboardType["type"], string> = {
-  "Due Today": "bg-cta text-white",
-  late: "bg-danger text-white",
-  Upcoming: "bg-upcoming text-white",
-  "Follow Up": "bg-info text-white ",
-  Completed: "bg-green text-white ",
+  "Due Today": "bg-today-accent text-white",
+  late: "bg-late-accent text-white",
+  Upcoming: "bg-upcoming-accent text-white",
+  "Follow Up": "bg-followup-accent text-white ",
+  Completed: "bg-completed-accent text-white ",
 };
 const bgColors: Record<DashboardType["type"], string> = {
-  "Due Today": "bg-brand",
-  late: "bg-followup-bg",
+  "Due Today": "bg-today-bg",
+  late: "bg-late-bg",
   Upcoming: "bg-upcoming-bg",
-  "Follow Up": "bg-upcoming-bg ",
-  Completed: "bg-late-bg ",
+  "Follow Up": "bg-followup-bg ",
+  Completed: "bg-completed-bg ",
 };
 
-export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
+const DashBoardCard: React.FC<ActivityFeedProps> = ({ activities }) => {
   const navigate = useNavigate();
   const handleDetails = (id: string) => {
     navigate(`/admin/dashboard-details/${id}`);
@@ -96,11 +88,20 @@ export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
                           <CommonHeader size="md">
                             {activity.title}
                           </CommonHeader>
-                          <CardAction
-                            onEdit={() => {}}
-                            onDelete={() => {}}
-                            onDetails={() => handleDetails(activity.id)}
-                          />
+                          <div className="flex gap-2">
+                            <CardAction
+                              onEdit={() => {}}
+                              onDelete={() => {}}
+                              onDetails={() => handleDetails(activity.id)}
+                            />
+
+                            <button
+                              onClick={() => handleSelectDashboard(activity)}
+                              className="text-cta p-1 rounded-md cursor-pointer border border-cta hover:bg-cta hover:text-white transition-all"
+                            >
+                              F/U
+                            </button>
+                          </div>
                         </div>
                         <div className="py-4">
                           {activity.description.map((item, index) => (
@@ -128,9 +129,8 @@ export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
                   <Badge
                     className={cn(
                       "text-xs font-medium border cursor-pointer",
-                      typeColors[activity.type],
+                      iconColors[activity.type],
                     )}
-                    onClick={() => handleSelectDashboard(activity)}
                   >
                     {activity.type}
                   </Badge>
@@ -149,4 +149,4 @@ export const TaskCard: React.FC<ActivityFeedProps> = ({ activities }) => {
   );
 };
 
-export default TaskCard;
+export default DashBoardCard;

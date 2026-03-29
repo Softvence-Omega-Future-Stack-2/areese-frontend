@@ -16,7 +16,7 @@ function CopyButton({ text }: { text: string }) {
     <button
       onClick={handleCopy}
       className={`flex items-center gap-1.5 cursor-pointer px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 ${
-        copied ? "bg-green-500 text-white" : "bg-cta  text-white"
+        copied ? "completed-bg-500 text-white" : "bg-cta  text-white"
       }`}
     >
       {copied ? (

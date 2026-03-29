@@ -1,11 +1,12 @@
-import CommonButton from "@/components/shared/CommonButton";
 import CommonSelect from "@/components/shared/CommonSelect";
 import CommonSpace from "@/components/shared/CommonSpace";
 import DashboardSearch from "@/components/shared/DashboardSearch";
 import DashboardTopSection from "@/components/shared/DashboardTopSection";
 import SectionHeader from "@/components/shared/SectionHeader";
 import StatCards from "@/components/shared/StatCards";
-import TaskCard, { type DashboardType } from "@/features/dashboard/TaskCard";
+import DashBoardCard, {
+  type DashboardType,
+} from "@/features/dashboard/DashBoardCard";
 import {
   AlertCircle,
   AlertTriangle,
@@ -17,7 +18,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const statsData = [
   {
@@ -25,7 +25,7 @@ const statsData = [
     label: "Due Today",
     value: 5,
     icon: <CheckCircle2 className="h-6 w-6" />,
-    iconBg: "bg-info",
+    iconBg: "bg-today-accent",
     iconColor: "text-white",
     trend: { value: 12, isPositive: true },
   },
@@ -34,7 +34,7 @@ const statsData = [
     label: "Follow Up",
     value: 8,
     icon: <Clock className="h-6 w-6" />,
-    iconBg: "bg-warning",
+    iconBg: "bg-followup-accent",
     iconColor: "text-white",
     trend: { value: 8, isPositive: true },
   },
@@ -43,7 +43,7 @@ const statsData = [
     label: "Late",
     value: 2,
     icon: <AlertCircle className="h-6 w-6" />,
-    iconBg: "bg-danger",
+    iconBg: "bg-late-accent",
     iconColor: "text-white",
     trend: { value: 5, isPositive: false },
   },
@@ -52,7 +52,7 @@ const statsData = [
     label: "Upcoming",
     value: 12,
     icon: <TrendingUp className="h-6 w-6" />,
-    iconBg: "bg-upcoming",
+    iconBg: "bg-upcoming-accent",
     iconColor: "text-white",
     trend: { value: 3, isPositive: true },
   },
@@ -293,8 +293,6 @@ const Dashboard = () => {
             activity.type.toLowerCase().replace(" ", "-") === filter,
         );
 
-  const navigate = useNavigate();
-
   return (
     <section className="w-full">
       <DashboardTopSection
@@ -308,7 +306,7 @@ const Dashboard = () => {
       <CommonSpace>
         <div className="flex flex-col lg:flex-row justify-between items-start pb-6 gap-3">
           <div className="w-full lg:w-auto">
-            <SectionHeader title="Task List" />
+            <SectionHeader title="Dashboard List" />
           </div>
           <div className="w-full lg:w-auto flex flex-col sm:flex-row gap-2">
             <DashboardSearch />
@@ -321,17 +319,10 @@ const Dashboard = () => {
                 onValueChange={(val) => setFilter(val)}
                 className="w-full sm:w-auto"
               />
-
-              <CommonButton
-                onClick={() => navigate("/admin/follow-ups")}
-                className="w-full sm:w-auto "
-              >
-                F/U
-              </CommonButton>
             </div>
           </div>
         </div>
-        <TaskCard activities={filteredActivities} />
+        <DashBoardCard activities={filteredActivities} />
       </CommonSpace>
     </section>
   );

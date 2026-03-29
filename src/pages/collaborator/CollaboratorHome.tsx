@@ -239,7 +239,6 @@ const CollaboratorHome = () => {
         </div>
       )}
 
-      {/* UPDATE MODAL */}
       {updateModal.open && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white p-5 rounded-xl w-[90%] max-w-md">
@@ -255,6 +254,7 @@ const CollaboratorHome = () => {
               </button>
             </div>
 
+            <label className={inputClass.label}>Write notes</label>
             <textarea
               className={inputClass.input}
               rows={4}

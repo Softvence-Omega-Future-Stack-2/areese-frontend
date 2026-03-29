@@ -1,6 +1,6 @@
 import { FiLogOut } from "react-icons/fi";
 
-import logo from "@/assets/images/profile.png";
+import logo from "@/assets/images/woman.webp";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Calendar,
@@ -41,20 +41,20 @@ export const sidebarItems: SidebarItem[] = [
     icon: LayoutDashboard,
     label: "View Dashboard",
     path: "/admin/dashboard",
-    section: "Main",
+    section: "Dashboard",
   },
   // Tasks
   {
     icon: Plus,
     label: "Create Dashboard",
     path: "/admin/create-dashboard",
-    section: "Tasks",
+    section: "Dashboard",
   },
   {
     icon: Repeat,
     label: "Follow-Ups",
     path: "/admin/follow-ups",
-    section: "Tasks",
+    section: "Dashboard",
   },
   // Packages & Bookings
   {
@@ -154,10 +154,10 @@ const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
 
   return (
     <aside
-      className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-40 w-[280px] transition-transform duration-300 ease-in-out md:translate-x-0 md:static bg-white lg:rounded-[10px] px-5 py-6 flex flex-col h-full sidebar-scroll`}
+      className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-40 w-[280px] transition-transform duration-300 ease-in-out md:translate-x-0 md:static bg-brand lg:rounded-[10px] px-5 py-6 flex flex-col h-full sidebar-scroll`}
     >
-      <div className="flex items-center gap-3 bg-white border border-border rounded-[5px] px-3 py-2 mb-5">
-        <Avatar className="h-8 w-8">
+      <div className="flex items-center gap-3 bg-late-bg  rounded-[5px] px-3 py-2 mb-5">
+        <Avatar className="h-10 w-10">
           <AvatarImage src={logo} />
           <AvatarFallback>ADMIN</AvatarFallback>
         </Avatar>
@@ -181,12 +181,12 @@ const AdminSidebar: FC<SidebarProps> = ({ sidebarOpen, onLinkClick }) => {
                   className={({ isActive }) =>
                     `flex items-center gap-3 w-full h-10 px-2 rounded ${
                       isActive
-                        ? "text-text bg-bg  font-semibold"
+                        ? "text-white bg-cta  font-semibold"
                         : "hover:bg-bg"
                     }`
                   }
                 >
-                  <item.icon className="h-4 w-4 text-text" />
+                  <item.icon className={`h-4 w-4 `} />
                   {item.label}
                 </NavLink>
               ))}

@@ -203,7 +203,7 @@ const AppointmentList = () => {
                             appt.status === "Scheduled"
                               ? "bg-info"
                               : appt.status === "Completed"
-                                ? "bg-green"
+                                ? "bg-completed-bg"
                                 : appt.status === "Cancelled"
                                   ? "bg-danger"
                                   : "bg-cta"
