@@ -30,18 +30,26 @@ const DontForgetHeader = () => {
 
         {/* Right Section */}
         <nav className=" items-center gap-4 text-sm hidden sm:flex">
-          <button className="text-white/70 hover:text-white transition">
+          <Link
+            to="/privacy"
+            className="text-white/70 hover:text-white transition"
+          >
             Privacy
-          </button>
+          </Link>
 
-          <button className="text-white/70 hover:text-white transition">
+          <Link
+            to="/terms"
+            className="text-white/70 hover:text-white transition"
+          >
             Terms
-          </button>
+          </Link>
 
-          {/* Optional CTA */}
-          <button className="hidden sm:inline-flex px-4 py-1.5 rounded-lg bg-white/90 text-black text-sm font-medium hover:bg-white transition">
+          <Link
+            to="/login"
+            className="hidden sm:inline-flex px-4 py-1.5 rounded-lg bg-white/90 text-black text-sm font-medium hover:bg-white transition"
+          >
             Get Started
-          </button>
+          </Link>
         </nav>
       </div>
     </header>

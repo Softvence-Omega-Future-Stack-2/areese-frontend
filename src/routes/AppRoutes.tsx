@@ -4,6 +4,7 @@ import CollaboratorLayout from "@/components/layout/CollaboratorLayout";
 import ContactPage from "@/features/contactPage/ContactPage";
 import ListDetail from "@/features/dashboard/ListDetail";
 import PricingHero from "@/features/home/PricingHero";
+import AboutPage from "@/pages/AboutPage";
 import BlogCategories from "@/pages/BlogCategories";
 import Blogs from "@/pages/Blogs";
 import CollaboratorHome from "@/pages/collaborator/CollaboratorHome";
@@ -16,10 +17,13 @@ import Login from "@/pages/login";
 import MessageTemplate from "@/pages/MessageTemplate";
 import Packages from "@/pages/Packages";
 import Plans from "@/pages/Plans";
+import Privacy from "@/pages/Privacy";
 import ProfileSettings from "@/pages/ProfileSettings";
 import PublicBooking from "@/pages/PublicBooking";
 import Settings from "@/pages/Settings";
+import Signup from "@/pages/Signup";
 import TeamAccess from "@/pages/TeamAccess";
+import Terms from "@/pages/Terms";
 import Users from "@/pages/Users";
 import ViewAppointments from "@/pages/ViewAppointments";
 import { createBrowserRouter } from "react-router-dom";
@@ -46,10 +50,31 @@ const router = createBrowserRouter([
         element: <ContactPage />,
       },
       {
+        path: "/about",
+
+        element: <AboutPage />,
+      },
+      {
+        path: "/signup",
+
+        element: <Signup />,
+      },
+      {
         path: "/login",
 
         element: <Login />,
       },
+      {
+        path: "/privacy",
+
+        element: <Privacy />,
+      },
+      {
+        path: "/terms",
+
+        element: <Terms />,
+      },
+
       {
         element: <MainLayout />,
         path: "/admin",

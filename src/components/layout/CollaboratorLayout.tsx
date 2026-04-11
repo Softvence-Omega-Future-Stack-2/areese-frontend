@@ -12,7 +12,7 @@ const CollaboratorLayout: React.FC = () => {
 
   return (
     <div className="w-full h-screen bg-bg pt-2 overflow-hidden">
-      <div className="w-full flex items-center justify-between bg-white">
+      <div className="w-full flex items-center justify-between bg-brand">
         <DashboardHeader sidebarOpen={sidebarOpen} />
         <div className="lg:hidden pr-4">
           <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>

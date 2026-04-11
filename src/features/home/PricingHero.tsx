@@ -2,6 +2,7 @@ import CommonButton from "@/components/shared/CommonButton";
 import DontForgetHeader from "@/components/shared/DontForgetHeader";
 import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const PricingHero: React.FC = () => {
   return (
@@ -19,21 +20,21 @@ const PricingHero: React.FC = () => {
             </p>
 
             <button className="px-8 py-4 bg-today-accent text-white rounded-full font-bold cursor-pointer mt-4">
-              Get Started →
+              <Link to="/signup"> Get Started →</Link>
             </button>
           </div>
 
-          <div className="relative bg-text rounded-2xl border border-white/[0.07] p-7 overflow-hidden ">
+          <div className="relative bg-bg rounded-2xl border border-white/[0.07] p-7 overflow-hidden ">
             <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-cta via-late-accent to-brand " />
 
-            <div className="absolute top-0 right-0 bg-cta text-white text-[10px] font-bold tracking-widest uppercase px-4 py-1 rounded-tr-md rounded-bl-md">
+            <div className="absolute top-0 right-0 bg-cta text-text text-[10px] font-bold tracking-widest uppercase px-4 py-1 rounded-tr-md rounded-bl-md">
               Dont Forget
             </div>
 
             <div className="flex flex-col gap-8 items-start justify-between">
               {/* Left */}
               <div className="flex-1 min-w-[220px]">
-                <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-1 mt-1">
+                <h2 className="text-xl sm:text-3xl font-extrabold text-text mb-1 mt-1">
                   Core Plan
                 </h2>
                 <p className="text-[13px] text-bg/50 mb-5">
@@ -55,7 +56,7 @@ const PricingHero: React.FC = () => {
                   ].map((f, i) => (
                     <li
                       key={i}
-                      className="flex items-center gap-2 text-sm text-bg font-medium"
+                      className="flex items-center gap-2 text-sm text-text font-medium"
                     >
                       <FiCheckCircle size={16} className="text-cta" />
 
@@ -65,20 +66,20 @@ const PricingHero: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="flex flex-col items-center gap-3 min-w-[200px]">
-                <div className="text-[54px] font-extrabold text-white leading-none">
+              <div className="flex flex-col items-center justify-center gap-3    w-full">
+                <div className="text-[54px] font-extrabold text-cta leading-none">
                   $30
-                  <span className="text-lg font-medium text-bg/50">/ mo</span>
+                  <span className="text-lg font-medium text-text">/ mo</span>
                 </div>
                 <CommonButton className="w-full! rounded-full!">
-                  Get Early Access
+                  <Link to="/signup">Sign Up</Link>
                 </CommonButton>
 
-                <p className="text-[11.5px] text-bg/50 text-center">
+                <p className="text-[11.5px] text-text text-center">
                   No hidden fees. Cancel anytime.
                 </p>
-                <div className="w-full  border border-late-bg text-late-bg text-[12.5px] font-medium px-4 py-2.5 rounded-lg text-center">
-                  Lock in this rate for life when you join by Feb 28, 2026
+                <div className="w-full  border border-cta text-cta text-[12.5px] font-medium px-4 py-2.5 rounded-lg text-center">
+                  Lock in this rate for life when you
                 </div>
               </div>
             </div>

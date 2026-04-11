@@ -1,8 +1,10 @@
 import CommonWrapper from "@/components/shared/CommonWrapper";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AiOutlineMinus } from "react-icons/ai";
 import { FiPlus } from "react-icons/fi";
+import { HiMenu } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import image from "../../assets/images/logo.jpg";
 
@@ -65,45 +67,108 @@ export default function HomePage() {
     <div className="bg-brand text-text overflow-x-hidden">
       <nav
         className={`fixed w-full z-50 flex justify-between items-center px-10 py-4 transition
-        ${scrollY > 20 ? "bg-brand/80 backdrop-blur  border-b border-info/20" : ""}`}
+  ${scrollY > 20 ? "bg-brand/80 backdrop-blur border-b border-info/20" : ""}`}
       >
+        {/* LOGO */}
         <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-          <div className=" w-20  h-18">
+          <div className="w-20 h-18">
             <img
-              className="w-full h-full object-cover rounded-2xl "
+              className="w-full h-full object-cover rounded-2xl"
               src={image}
               alt="logo"
             />
           </div>
-          <span className=" hidden sm:block">Dont forget</span>
+          <span className="hidden sm:block">Dont forget</span>
         </Link>
 
-        <div className="hidden md:flex gap-10 text-sm font-medium text-text">
+        {/* DESKTOP MENU */}
+        <div className="hidden lg:flex gap-10 text-sm font-medium text-text">
           <a href="#faq" className="hover:text-info cursor-pointer">
             FAQs
           </a>
           <Link to="/price" className="hover:text-info cursor-pointer">
             Pricing
           </Link>
+          <Link to="/about" className="hover:text-info cursor-pointer">
+            About Us
+          </Link>
           <Link to="/contact" className="hover:text-info cursor-pointer">
             Contact
           </Link>
         </div>
 
-        <div className="flex gap-3">
-          <Link
-            to="/login"
-            className="px-5 py-2 rounded-full border border-today-accent text-today-accent text-sm font-semibold cursor-pointer"
-          >
-            Login
-          </Link>
+        {/* RIGHT SIDE */}
+        <div className="flex items-center gap-3">
+          {/* DESKTOP BUTTONS */}
+          <div className="hidden lg:flex gap-3">
+            <Link
+              to="/login"
+              className="px-5 py-2 rounded-full border border-today-accent text-today-accent text-sm font-semibold"
+            >
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              className="px-5 py-2 rounded-full bg-today-accent text-white text-sm font-semibold"
+            >
+              Sign Up
+            </Link>
+          </div>
 
-          <a
-            href="#signup"
-            className="px-5 py-2 rounded-full bg-today-accent text-white text-sm font-semibold  cursor-pointer"
-          >
-            Sign Up
-          </a>
+          {/* MOBILE / MD SHEET */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="lg:hidden text-3xl cursor-pointer ">
+                <HiMenu />
+              </button>
+            </SheetTrigger>
+
+            <SheetContent
+              side="right"
+              className="w-72 flex flex-col gap-6 p-4 bg-brand border border-0"
+            >
+              {/* LINKS */}
+              <a
+                href="#faq"
+                className="text-sm font-medium hover:text-info  cursor-pointer"
+              >
+                FAQs
+              </a>
+
+              <Link
+                to="/price"
+                className="text-sm font-medium hover:text-info  cursor-pointer"
+              >
+                Pricing
+              </Link>
+              <Link to="/about" className="hover:text-info cursor-pointer">
+                About Us
+              </Link>
+              <Link
+                to="/contact"
+                className="text-sm font-medium hover:text-info cursor-pointer"
+              >
+                Contact
+              </Link>
+
+              {/* ACTIONS */}
+              <div className="mt-6 flex flex-col gap-3">
+                <Link
+                  to="/login"
+                  className="px-4 py-2 border  border-text hover:border-today-accent hover:bg-today-accent hover:text-white transition-all rounded-xl text-center"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className="px-4 py-2 bg-today-accent text-white rounded-xl text-center"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
       <CommonWrapper>
@@ -132,9 +197,12 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 ">
-                <button className="px-8 py-4 bg-today-accent text-white rounded-full font-bold cursor-pointer">
+                <Link
+                  to="/signup"
+                  className="px-8 py-4 bg-today-accent text-white rounded-full font-bold cursor-pointer"
+                >
                   Get Started →
-                </button>
+                </Link>
               </div>
 
               <p className="text-sm text-text mt-5">
@@ -247,9 +315,10 @@ export default function HomePage() {
 
       <section id="signup" className="py-24 bg-bg px-10">
         <div className="max-w-[1400px] mx-auto grid md:grid-cols-2 gap-16 items-center">
+          {/* LEFT CONTENT */}
           <div>
-            <p className="text-indigo-500 font-bold uppercase text-sm mb-3">
-              Simple pricing
+            <p className="text-info font-bold uppercase text-sm mb-3">
+              Pricing
             </p>
 
             <h2 className="text-3xl sm:text-5xl font-black mb-4">
@@ -259,7 +328,8 @@ export default function HomePage() {
             </h2>
 
             <p className="text-text/50 mb-6">
-              Early subscribers lock in $30/month forever.
+              Everything you need to manage bookings, clients, and your business
+              — in one simple plan.
             </p>
 
             <div className="flex items-end gap-2">
@@ -268,22 +338,22 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* RIGHT FORM */}
           <div className="bg-white p-8 rounded-2xl shadow-xl">
-            <input
-              className="w-full border rounded-lg p-4 mb-4"
-              placeholder="Enter your email"
-            />
+            <Link
+              to="/price"
+              className="w-full  flex justify-center cursor-pointer bg-today-accent text-white py-4 rounded-lg font-bold"
+            >
+              Pricing
+            </Link>
 
-            <button className="w-full cursor-pointer bg-today-accent text-white py-4 rounded-lg font-bold">
-              Sign up
-            </button>
-
-            <p className="text-xs text-text/50 text-center mt-3">
+            <p className="text-xs text-text/50 text-center mt-2">
               Cancel anytime · No setup fees
             </p>
           </div>
         </div>
       </section>
+
       <CommonWrapper>
         <section id="faq" className="py-24 ">
           <div className="text-center mb-16">
@@ -320,7 +390,7 @@ export default function HomePage() {
           </div>
         </section>
       </CommonWrapper>
-      <section className="py-24 bg-black text-center text-white">
+      <section className="py-24 bg-bg text-center text-text">
         <h2 className=" text-2xl sm:text-4xl font-black mb-6">
           Ready to never forget again?
         </h2>
@@ -333,13 +403,16 @@ export default function HomePage() {
             placeholder="Email"
           />
 
-          <button className="px-8 py-3 bg-today-accent rounded-lg font-bold cursor-pointer">
+          <Link
+            to="/signup"
+            className="px-8 py-3 bg-today-accent rounded-lg font-bold cursor-pointer text-white"
+          >
             Get Started →
-          </button>
+          </Link>
         </div>
       </section>
 
-      <footer className="bg-black text-white text-sm  pb-12 text-center">
+      <footer className="bg-brand text-text text-sm py-6   text-center">
         © 2026 Don't Forget — All rights reserved.
       </footer>
     </div>

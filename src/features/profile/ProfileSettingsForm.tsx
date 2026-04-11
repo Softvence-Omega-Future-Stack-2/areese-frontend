@@ -54,7 +54,7 @@ const ProfileSettingsForm: FC = () => {
               type="text"
               value={form.firstName}
               onChange={(e) => handleChange("firstName", e.target.value)}
-              placeholder="Enter full name"
+              placeholder="Enter fist name"
               className={inputClass.input}
             />
           </div>
@@ -64,7 +64,7 @@ const ProfileSettingsForm: FC = () => {
               type="text"
               value={form.lastName}
               onChange={(e) => handleChange("lastName", e.target.value)}
-              placeholder="Enter full name"
+              placeholder="Enter last name"
               className={inputClass.input}
             />
           </div>
@@ -99,7 +99,7 @@ const ProfileSettingsForm: FC = () => {
               type="password"
               value={form.currentPassword}
               onChange={(e) => handleChange("currentPassword", e.target.value)}
-              placeholder="Enter new password"
+              placeholder="Enter current password"
               className={inputClass.input}
             />
           </div>
@@ -147,7 +147,7 @@ const ProfileSettingsForm: FC = () => {
               type="text"
               value={form.accountType}
               onChange={(e) => handleChange("accountType", e.target.value)}
-              placeholder="Enter full name"
+              placeholder="Enter account type"
               className={inputClass.input}
             />
           </div>
@@ -157,7 +157,7 @@ const ProfileSettingsForm: FC = () => {
               type="text"
               value={form.memberSince}
               onChange={(e) => handleChange("memberSince", e.target.value)}
-              placeholder="Enter full name"
+              placeholder="Enter member since"
               className={inputClass.input}
             />
           </div>

@@ -1,3 +1,4 @@
+import logo from "@/assets/images/woman.webp";
 import CommonButton from "@/components/shared/CommonButton";
 import CommonHeader from "@/components/shared/CommonHeader";
 import CommonSelect from "@/components/shared/CommonSelect";
@@ -6,9 +7,9 @@ import { Copy } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import logo from "../../assets/images/profile.png";
 import { inputClass } from "../task/CreateDashboardForm";
 import { TimeInput } from "./TimeInput";
+
 function OrangeCheckbox({
   checked,
   onChange,
