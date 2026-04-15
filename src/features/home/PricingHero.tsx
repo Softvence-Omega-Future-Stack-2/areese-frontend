@@ -43,7 +43,7 @@ const PricingHero: React.FC = () => {
                 <ul className="space-y-2.5">
                   {[
                     "Create dashboards & tasks",
-                    "Key points & notes per dashboard",
+                    "Key points per dashboard",
                     "Follow-ups tied to your work",
                     "Public booking & appointment view",
                     "Payment integration (Stripe & PayPal)",
@@ -79,7 +79,7 @@ const PricingHero: React.FC = () => {
                   No hidden fees. Cancel anytime.
                 </p>
                 <div className="w-full  border border-cta text-cta text-[12.5px] font-medium px-4 py-2.5 rounded-lg text-center">
-                  Lock in this rate for life when you
+                  Lock in this rate when you
                 </div>
               </div>
             </div>
