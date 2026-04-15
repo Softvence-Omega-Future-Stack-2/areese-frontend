@@ -2,7 +2,7 @@ import DontForgetHeader from "@/components/shared/DontForgetHeader";
 
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-bg text-text">
+    <div className="min-h-screen bg-brand text-text">
       <DontForgetHeader />
 
       <div className="max-w-7xl mx-auto px-6 py-20">
